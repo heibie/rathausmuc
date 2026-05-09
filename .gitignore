@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+
+# Einmalige Migrations-/Airtable-Skripte (enthalten API-Token)
+export_csv.py
+update_airtable_ergebnisse.py
+
+# Alte Skripte (Airtable-Ära)
+scrape_risi.py
+scrape_ergebnisse.py
+update_excel.py
+restructure_hoerspiele.py
+
+# Excel-Dateien
+*.xlsx
+~$*
+
+# macOS
+.DS_Store
+
+# Lokale Entwicklung
+*.log

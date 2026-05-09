@@ -1,0 +1,212 @@
+{
+  "name": "muenchen-kommunalpolitik-2026",
+  "title": "München Kommunalpolitik 2026 – Stadtrat und Bezirksausschüsse",
+  "description": "Gewählte Mitglieder des Münchner Stadtrats und der 25 Bezirksausschüsse nach der Kommunalwahl vom 8. März 2026. Datenquelle: Ratsinformationssystem München (risi.muenchen.de) und Wahlergebnisse (wahlen-muenchen.de).",
+  "licenses": [
+    {
+      "name": "cc-by-4.0",
+      "title": "Creative Commons Attribution 4.0",
+      "path": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Heiko Bielinski",
+      "email": "heiko@bielinski.de",
+      "role": "author"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Ratsinformationssystem München",
+      "path": "https://risi.muenchen.de"
+    },
+    {
+      "title": "Wahlergebnisse München – Bezirksausschusswahl 2026",
+      "path": "https://www.wahlen-muenchen.de/ergebnisse/2_20260308bezirksausschusswahl/"
+    }
+  ],
+  "version": "1.0.0",
+  "created": "2026-05-09",
+  "resources": [
+    {
+      "name": "stadtrat",
+      "path": "stadtrat.csv",
+      "title": "Stadtrat München 2026",
+      "description": "81 gewählte Mitglieder des Münchner Stadtrats, Wahlperiode 2026–2032.",
+      "schema": {
+        "fields": [
+          { "name": "Nachname",      "type": "string",  "constraints": { "required": true } },
+          { "name": "Vorname",       "type": "string",  "constraints": { "required": true } },
+          { "name": "Geschlecht",    "type": "string",  "constraints": { "enum": ["Herr", "Frau", ""] } },
+          { "name": "ID",            "type": "string" },
+          { "name": "Titel",         "type": "string",  "constraints": { "enum": ["Dr.", "Prof. Dr.", ""] } },
+          { "name": "Partei",        "type": "string" },
+          { "name": "Fraktion",      "type": "string" },
+          { "name": "Wahlperiode",   "type": "string" },
+          { "name": "E-Mail",        "type": "string",  "format": "email" },
+          { "name": "Website",       "type": "string",  "format": "uri" },
+          { "name": "Büro-Adresse",  "type": "string" },
+          { "name": "Instagram",     "type": "string",  "format": "uri" },
+          { "name": "Facebook",      "type": "string",  "format": "uri" },
+          { "name": "LinkedIn",      "type": "string",  "format": "uri" },
+          { "name": "TikTok",        "type": "string",  "format": "uri" },
+          { "name": "Mastodon",      "type": "string",  "format": "uri" },
+          { "name": "RIS-Link",      "type": "string",  "format": "uri" },
+          { "name": "Image",         "type": "string",  "format": "uri" },
+          { "name": "Wahldatum",     "type": "date",    "format": "%Y-%m-%d" },
+          { "name": "Mandatsbeginn", "type": "date",    "format": "%Y-%m-%d" },
+          { "name": "Listenplatz",   "type": "integer" },
+          { "name": "Stimmen",       "type": "integer" },
+          { "name": "Lebenslauf",    "type": "string" },
+          { "name": "Ausschuss 1",   "type": "string" },
+          { "name": "Ausschuss 2",   "type": "string" },
+          { "name": "Ausschuss 3",   "type": "string" },
+          { "name": "Ausschuss 4",   "type": "string" },
+          { "name": "Ausschuss 5",   "type": "string" },
+          { "name": "Ausschuss 6",   "type": "string" },
+          { "name": "Ausschuss 7",   "type": "string" },
+          { "name": "Ausschuss 8",   "type": "string" }
+        ],
+        "primaryKey": ["ID"]
+      }
+    },
+    {
+      "name": "ba01", "path": "ba01.csv", "title": "BA 01 · Altstadt-Lehel",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba02", "path": "ba02.csv", "title": "BA 02 · Ludwigsvorstadt-Isarvorstadt",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba03", "path": "ba03.csv", "title": "BA 03 · Maxvorstadt",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba04", "path": "ba04.csv", "title": "BA 04 · Schwabing-West",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba05", "path": "ba05.csv", "title": "BA 05 · Au-Haidhausen",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba06", "path": "ba06.csv", "title": "BA 06 · Sendling",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba07", "path": "ba07.csv", "title": "BA 07 · Sendling-Westpark",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba08", "path": "ba08.csv", "title": "BA 08 · Schwanthalerhöhe",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba09", "path": "ba09.csv", "title": "BA 09 · Neuhausen-Nymphenburg",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba10", "path": "ba10.csv", "title": "BA 10 · Moosach",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba11", "path": "ba11.csv", "title": "BA 11 · Milbertshofen-Am Hart",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba12", "path": "ba12.csv", "title": "BA 12 · Schwabing-Freimann",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba13", "path": "ba13.csv", "title": "BA 13 · Bogenhausen",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba14", "path": "ba14.csv", "title": "BA 14 · Berg am Laim",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba15", "path": "ba15.csv", "title": "BA 15 · Trudering-Riem",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba16", "path": "ba16.csv", "title": "BA 16 · Ramersdorf-Perlach",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba17", "path": "ba17.csv", "title": "BA 17 · Obergiesing-Fasangarten",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba18", "path": "ba18.csv", "title": "BA 18 · Untergiesing-Harlaching",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba19", "path": "ba19.csv", "title": "BA 19 · Thalkirchen-Obersendling-Forstenried-Fürstenried-Solln",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba20", "path": "ba20.csv", "title": "BA 20 · Hadern",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba21", "path": "ba21.csv", "title": "BA 21 · Pasing-Obermenzing",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba22", "path": "ba22.csv", "title": "BA 22 · Aubing-Lochhausen-Langwied",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba23", "path": "ba23.csv", "title": "BA 23 · Allach-Untermenzing",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba24", "path": "ba24.csv", "title": "BA 24 · Feldmoching-Hasenbergl",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    },
+    {
+      "name": "ba25", "path": "ba25.csv", "title": "BA 25 · Laim",
+      "schema": { "$ref": "#/definitions/ba-schema" }
+    }
+  ],
+  "definitions": {
+    "ba-schema": {
+      "fields": [
+        { "name": "Nachname",      "type": "string",  "constraints": { "required": true } },
+        { "name": "Vorname",       "type": "string",  "constraints": { "required": true } },
+        { "name": "Geschlecht",    "type": "string",  "constraints": { "enum": ["Herr", "Frau", ""] } },
+        { "name": "ID",            "type": "string" },
+        { "name": "Titel",         "type": "string" },
+        { "name": "Partei",        "type": "string" },
+        { "name": "Wahlperiode",   "type": "string" },
+        { "name": "E-Mail",        "type": "string",  "format": "email" },
+        { "name": "Website",       "type": "string",  "format": "uri" },
+        { "name": "Büro-Adresse",  "type": "string" },
+        { "name": "Instagram",     "type": "string",  "format": "uri" },
+        { "name": "Facebook",      "type": "string",  "format": "uri" },
+        { "name": "LinkedIn",      "type": "string",  "format": "uri" },
+        { "name": "TikTok",        "type": "string",  "format": "uri" },
+        { "name": "Mastodon",      "type": "string",  "format": "uri" },
+        { "name": "RIS-Link",      "type": "string",  "format": "uri" },
+        { "name": "Image",         "type": "string",  "format": "uri" },
+        { "name": "Wahldatum",     "type": "date",    "format": "%Y-%m-%d" },
+        { "name": "Mandatsbeginn", "type": "date",    "format": "%Y-%m-%d" },
+        { "name": "Listenplatz",   "type": "integer" },
+        { "name": "Stimmen",       "type": "integer" },
+        { "name": "Lebenslauf",    "type": "string" },
+        { "name": "Ausschuss 1",   "type": "string" },
+        { "name": "Ausschuss 2",   "type": "string" },
+        { "name": "Ausschuss 3",   "type": "string" },
+        { "name": "Ausschuss 4",   "type": "string" },
+        { "name": "Ausschuss 5",   "type": "string" },
+        { "name": "Ausschuss 6",   "type": "string" },
+        { "name": "Ausschuss 7",   "type": "string" },
+        { "name": "Ausschuss 8",   "type": "string" }
+      ],
+      "primaryKey": ["ID"]
+    }
+  }
+}
