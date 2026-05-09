@@ -325,20 +325,17 @@ async function renderSteckbrief(data, gremium) {
         const dichte  = Number(b['einwohnerdichte']).toLocaleString('de');
 
         bezirkHtml = `
-          <div class="steckbrief-section">
-            <div class="steckbrief-label">Stadtbezirk</div>
-            <div class="steckbrief-body">
-              <div>
-                <div class="steckbrief-stats">
-                  <div class="stat"><div class="stat-value">${ew}</div><div class="stat-label">Einwohner</div></div>
-                  <div class="stat"><div class="stat-value">${km2} km²</div><div class="stat-label">Fläche (${flaeche} ha)</div></div>
-                  <div class="stat"><div class="stat-value">${dichte}</div><div class="stat-label">EW pro Hektar</div></div>
-                </div>
-                <div class="steckbrief-source">Quelle: Open Data München · Stand 31.12.2024</div>
-              </div>
-              ${features.length ? '<div class="steckbrief-map"><div id="bezirk-map"></div></div>' : ''}
+          <div class="chart-card">
+            <div class="chart-title">Stadtbezirk</div>
+            <div class="steckbrief-stats">
+              <div class="stat"><div class="stat-value">${ew}</div><div class="stat-label">Einwohner</div></div>
+              <div class="stat"><div class="stat-value">${km2} km²</div><div class="stat-label">Fläche (${flaeche} ha)</div></div>
+              <div class="stat"><div class="stat-value">${dichte}</div><div class="stat-label">EW / Hektar</div></div>
             </div>
-          </div>`;
+            <div class="steckbrief-source">Quelle: Open Data München · Stand 31.12.2024</div>
+          </div>
+          ${features.length ? `<div class="chart-card" style="padding:0;overflow:hidden"><div id="bezirk-map"></div></div>` : ''}
+        `;
       }
     } catch(e) { /* Bezirkdaten optional */ }
   }
@@ -356,7 +353,7 @@ async function renderSteckbrief(data, gremium) {
     <div class="chart-card"><div class="chart-title">Kontaktdaten-Abdeckung</div><div class="chart-wrap"><canvas id="chart-kontakt"></canvas></div></div>
   `;
 
-  document.getElementById('content').innerHTML = bezirkHtml + `<div class="charts-grid">${chartCards}</div>`;
+  document.getElementById('content').innerHTML = `<div class="charts-grid">${bezirkHtml}${chartCards}</div>`;
 
   if (bezirkFeatures.length) initBezirkMap(bezirkFeatures);
 
