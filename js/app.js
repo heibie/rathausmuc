@@ -487,7 +487,7 @@ function showError(msg) {
 async function render() {
   const { slug, tab } = parseHash();
   const gremium = GREMIEN_BY_SLUG[slug] || GREMIEN[0];
-  const actualTab = (gremium.tabs || ['liste','auswertung']).includes(tab) ? tab : 'liste';
+  const actualTab = (gremium.tabs || ['liste','steckbrief']).includes(tab) ? tab : 'liste';
 
   // Falls Slug unbekannt oder Tab nicht verfügbar → korrekten Hash setzen
   if (!GREMIEN_BY_SLUG[slug] || actualTab !== tab) {
