@@ -19,36 +19,32 @@ async function fetchBezirkGeo() {
   return bezirkGeoCache;
 }
 
-function bezirkToSvg(features, size = 180) {
-  const coords = [];
-  for (const f of features) {
-    const geom = f.geometry;
-    const rings = geom.type === 'Polygon'
-      ? [geom.coordinates[0]]
-      : geom.coordinates.map(p => p[0]);
-    for (const r of rings) coords.push(...r);
-  }
-  const xs = coords.map(c => c[0]), ys = coords.map(c => c[1]);
-  const minX = Math.min(...xs), maxX = Math.max(...xs);
-  const minY = Math.min(...ys), maxY = Math.max(...ys);
-  const pad   = 10;
-  const scale = (size - pad * 2) / Math.max(maxX - minX, maxY - minY);
-  const offX  = (size - (maxX - minX) * scale) / 2;
-  const offY  = (size - (maxY - minY) * scale) / 2;
-  const proj  = ([lng, lat]) =>
-    `${(offX + (lng - minX) * scale).toFixed(1)},${(size - offY - (lat - minY) * scale).toFixed(1)}`;
+let _leafletMap = null;
 
-  let paths = '';
-  for (const f of features) {
-    const geom = f.geometry;
-    const rings = geom.type === 'Polygon'
-      ? [geom.coordinates[0]]
-      : geom.coordinates.map(p => p[0]);
-    for (const ring of rings) {
-      paths += `<path d="M ${ring.map(proj).join(' L ')} Z" fill="#FFCC00" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/>`;
-    }
-  }
-  return `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="display:block">${paths}</svg>`;
+function initBezirkMap(features) {
+  if (_leafletMap) { _leafletMap.remove(); _leafletMap = null; }
+  const container = document.getElementById('bezirk-map');
+  if (!container) return;
+
+  _leafletMap = L.map('bezirk-map', {
+    zoomControl: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    touchZoom: false,
+    dragging: false,
+    attributionControl: true,
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OSM</a> © <a href="https://carto.com/">CARTO</a>',
+    maxZoom: 19,
+  }).addTo(_leafletMap);
+
+  const geoLayer = L.geoJSON({ type: 'FeatureCollection', features }, {
+    style: { color: '#111111', weight: 2, fillColor: '#FFCC00', fillOpacity: 0.45 },
+  }).addTo(_leafletMap);
+
+  _leafletMap.fitBounds(geoLayer.getBounds(), { padding: [24, 24] });
 }
 
 async function fetchGremium(csvFile) {
@@ -308,18 +304,19 @@ async function renderSteckbrief(data, gremium) {
 
   // Bezirk-Infos für BAs laden
   let bezirkHtml = '';
+  let bezirkFeatures = [];
   if (!isStadtrat && gremium.baNum) {
     try {
       const [bezirkData, geoData] = await Promise.all([fetchBezirkData(), fetchBezirkGeo()]);
       const b = bezirkData.find(r => parseInt(r['stadtbezirksnummer']) === gremium.baNum);
       const features = geoData.features.filter(f => parseInt(f.properties.sb_nummer) === gremium.baNum);
+      bezirkFeatures = features;
 
       if (b) {
         const ew      = Number(b['bevölkerung']).toLocaleString('de');
         const flaeche = Number(b['fläche in ha']).toLocaleString('de', { maximumFractionDigits: 0 });
         const km2     = (Number(b['fläche in ha']) / 100).toLocaleString('de', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         const dichte  = Number(b['einwohnerdichte']).toLocaleString('de');
-        const svgMap  = features.length ? bezirkToSvg(features) : '';
 
         bezirkHtml = `
           <div class="steckbrief-section">
@@ -333,7 +330,7 @@ async function renderSteckbrief(data, gremium) {
                 </div>
                 <div class="steckbrief-source">Quelle: Open Data München · Stand 31.12.2024</div>
               </div>
-              ${svgMap ? `<div class="steckbrief-map">${svgMap}</div>` : ''}
+              ${features.length ? '<div class="steckbrief-map"><div id="bezirk-map"></div></div>' : ''}
             </div>
           </div>`;
       }
@@ -354,6 +351,8 @@ async function renderSteckbrief(data, gremium) {
   `;
 
   document.getElementById('content').innerHTML = bezirkHtml + `<div class="charts-grid">${chartCards}</div>`;
+
+  if (bezirkFeatures.length) initBezirkMap(bezirkFeatures);
 
   const chartDefaults = {
     plugins: { legend: { labels: { color: '#74788a', font: { size: 12 } } } }
