@@ -25,9 +25,7 @@ function initBezirkMap(features) {
   if (_leafletMap) { _leafletMap.remove(); _leafletMap = null; }
   if (!document.getElementById('bezirk-map')) return;
 
-  // Bounds vorab berechnen, bevor die Map initialisiert wird
-  const bounds = L.geoJSON({ type: 'FeatureCollection', features }).getBounds();
-
+  // Sofort gültige View setzen damit nie Weltkarte zu sehen ist
   _leafletMap = L.map('bezirk-map', {
     zoomControl: false,
     scrollWheelZoom: false,
@@ -35,21 +33,24 @@ function initBezirkMap(features) {
     touchZoom: false,
     dragging: false,
     attributionControl: false,
-  });
+  }).setView([48.137, 11.576], 11);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
   }).addTo(_leafletMap);
 
-  L.geoJSON({ type: 'FeatureCollection', features }, {
-    style: { color: '#111111', weight: 2, fillColor: '#FFCC00', fillOpacity: 0.45 },
+  const geoLayer = L.geoJSON({ type: 'FeatureCollection', features }, {
+    style: { color: '#111111', weight: 2.5, fillColor: '#FFCC00', fillOpacity: 0.45 },
   }).addTo(_leafletMap);
 
-  // Nach Browser-Layout-Pass einpassen, damit die Container-Größe bekannt ist
-  requestAnimationFrame(() => {
+  // 150 ms warten bis Container-Größe vom Browser berechnet wurde, dann einpassen
+  setTimeout(() => {
     _leafletMap.invalidateSize();
-    _leafletMap.fitBounds(bounds, { padding: [20, 20] });
-  });
+    const bounds = geoLayer.getBounds();
+    if (bounds.isValid()) {
+      _leafletMap.fitBounds(bounds, { padding: [20, 20] });
+    }
+  }, 150);
 }
 
 async function fetchGremium(csvFile) {
