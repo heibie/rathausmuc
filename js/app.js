@@ -1,6 +1,7 @@
 // ─── Cache ────────────────────────────────────────────────────────────────────
 const dataCache = {};
 let bezirkDataCache = null;
+let bezirkGeoCache  = null;
 
 async function fetchBezirkData() {
   if (bezirkDataCache) return bezirkDataCache;
@@ -9,6 +10,45 @@ async function fetchBezirkData() {
   const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
   bezirkDataCache = data;
   return data;
+}
+
+async function fetchBezirkGeo() {
+  if (bezirkGeoCache) return bezirkGeoCache;
+  const res = await fetch('data/bezirke.geojson');
+  bezirkGeoCache = await res.json();
+  return bezirkGeoCache;
+}
+
+function bezirkToSvg(features, size = 180) {
+  const coords = [];
+  for (const f of features) {
+    const geom = f.geometry;
+    const rings = geom.type === 'Polygon'
+      ? [geom.coordinates[0]]
+      : geom.coordinates.map(p => p[0]);
+    for (const r of rings) coords.push(...r);
+  }
+  const xs = coords.map(c => c[0]), ys = coords.map(c => c[1]);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+  const pad   = 10;
+  const scale = (size - pad * 2) / Math.max(maxX - minX, maxY - minY);
+  const offX  = (size - (maxX - minX) * scale) / 2;
+  const offY  = (size - (maxY - minY) * scale) / 2;
+  const proj  = ([lng, lat]) =>
+    `${(offX + (lng - minX) * scale).toFixed(1)},${(size - offY - (lat - minY) * scale).toFixed(1)}`;
+
+  let paths = '';
+  for (const f of features) {
+    const geom = f.geometry;
+    const rings = geom.type === 'Polygon'
+      ? [geom.coordinates[0]]
+      : geom.coordinates.map(p => p[0]);
+    for (const ring of rings) {
+      paths += `<path d="M ${ring.map(proj).join(' L ')} Z" fill="#FFCC00" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/>`;
+    }
+  }
+  return `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" style="display:block">${paths}</svg>`;
 }
 
 async function fetchGremium(csvFile) {
@@ -270,22 +310,31 @@ async function renderSteckbrief(data, gremium) {
   let bezirkHtml = '';
   if (!isStadtrat && gremium.baNum) {
     try {
-      const bezirkData = await fetchBezirkData();
+      const [bezirkData, geoData] = await Promise.all([fetchBezirkData(), fetchBezirkGeo()]);
       const b = bezirkData.find(r => parseInt(r['stadtbezirksnummer']) === gremium.baNum);
+      const features = geoData.features.filter(f => parseInt(f.properties.sb_nummer) === gremium.baNum);
+
       if (b) {
         const ew      = Number(b['bevölkerung']).toLocaleString('de');
         const flaeche = Number(b['fläche in ha']).toLocaleString('de', { maximumFractionDigits: 0 });
         const km2     = (Number(b['fläche in ha']) / 100).toLocaleString('de', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         const dichte  = Number(b['einwohnerdichte']).toLocaleString('de');
+        const svgMap  = features.length ? bezirkToSvg(features) : '';
+
         bezirkHtml = `
           <div class="steckbrief-section">
             <div class="steckbrief-label">Stadtbezirk</div>
-            <div class="steckbrief-stats">
-              <div class="stat"><div class="stat-value">${ew}</div><div class="stat-label">Einwohner</div></div>
-              <div class="stat"><div class="stat-value">${km2} km²</div><div class="stat-label">Fläche (${flaeche} ha)</div></div>
-              <div class="stat"><div class="stat-value">${dichte}</div><div class="stat-label">EW pro Hektar</div></div>
+            <div class="steckbrief-body">
+              <div>
+                <div class="steckbrief-stats">
+                  <div class="stat"><div class="stat-value">${ew}</div><div class="stat-label">Einwohner</div></div>
+                  <div class="stat"><div class="stat-value">${km2} km²</div><div class="stat-label">Fläche (${flaeche} ha)</div></div>
+                  <div class="stat"><div class="stat-value">${dichte}</div><div class="stat-label">EW pro Hektar</div></div>
+                </div>
+                <div class="steckbrief-source">Quelle: Open Data München · Stand 31.12.2024</div>
+              </div>
+              ${svgMap ? `<div class="steckbrief-map">${svgMap}</div>` : ''}
             </div>
-            <div class="steckbrief-source">Quelle: Open Data München · Stand 31.12.2024</div>
           </div>`;
       }
     } catch(e) { /* Bezirkdaten optional */ }
@@ -506,9 +555,13 @@ async function render() {
   showLoading();
   try {
     const data = await fetchGremium(gremium.csvFile);
-    renderStats(data, gremium);
-    if (actualTab === 'liste') renderListe(data, gremium);
-    else await renderSteckbrief(data, gremium);
+    if (actualTab === 'liste') {
+      renderStats(data, gremium);
+      renderListe(data, gremium);
+    } else {
+      document.getElementById('stats-bar').innerHTML = '';
+      await renderSteckbrief(data, gremium);
+    }
   } catch(e) {
     showError(`Fehler beim Laden: ${e.message}`);
     console.error(e);
