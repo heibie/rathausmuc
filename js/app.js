@@ -1,5 +1,15 @@
 // ─── Cache ────────────────────────────────────────────────────────────────────
 const dataCache = {};
+let bezirkDataCache = null;
+
+async function fetchBezirkData() {
+  if (bezirkDataCache) return bezirkDataCache;
+  const res = await fetch('data/bezirke_bevoelkerung.csv');
+  const text = await res.text();
+  const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
+  bezirkDataCache = data;
+  return data;
+}
 
 async function fetchGremium(csvFile) {
   if (dataCache[csvFile]) return dataCache[csvFile];
@@ -51,8 +61,8 @@ function renderNav(activeSlug) {
 
 // ─── Sub-Tabs ─────────────────────────────────────────────────────────────────
 function renderSubNav(gremium, activeTab) {
-  const tabs = gremium.tabs || ['liste', 'auswertung'];
-  const labels = { liste: 'Liste', auswertung: 'Auswertung', netzwerkkarte: 'Netzwerkkarte' };
+  const tabs = gremium.tabs || ['liste', 'steckbrief'];
+  const labels = { liste: 'Liste', steckbrief: 'Steckbrief', netzwerkkarte: 'Netzwerkkarte' };
   const tabsHtml = tabs.map(t => `
     <a class="tab${t === activeTab ? ' active' : ''}" href="#${gremium.slug}/${t}">${labels[t]}</a>`).join('');
 
@@ -252,9 +262,34 @@ function renderTableBody(data, gremium) {
   }).join('');
 }
 
-// ─── Auswertung ───────────────────────────────────────────────────────────────
-function renderAuswertung(data, gremium) {
+// ─── Steckbrief ───────────────────────────────────────────────────────────────
+async function renderSteckbrief(data, gremium) {
   const isStadtrat = gremium.type === 'stadtrat';
+
+  // Bezirk-Infos für BAs laden
+  let bezirkHtml = '';
+  if (!isStadtrat && gremium.baNum) {
+    try {
+      const bezirkData = await fetchBezirkData();
+      const b = bezirkData.find(r => parseInt(r['stadtbezirksnummer']) === gremium.baNum);
+      if (b) {
+        const ew      = Number(b['bevölkerung']).toLocaleString('de');
+        const flaeche = Number(b['fläche in ha']).toLocaleString('de', { maximumFractionDigits: 0 });
+        const km2     = (Number(b['fläche in ha']) / 100).toLocaleString('de', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const dichte  = Number(b['einwohnerdichte']).toLocaleString('de');
+        bezirkHtml = `
+          <div class="steckbrief-section">
+            <div class="steckbrief-label">Stadtbezirk</div>
+            <div class="steckbrief-stats">
+              <div class="stat"><div class="stat-value">${ew}</div><div class="stat-label">Einwohner</div></div>
+              <div class="stat"><div class="stat-value">${km2} km²</div><div class="stat-label">Fläche (${flaeche} ha)</div></div>
+              <div class="stat"><div class="stat-value">${dichte}</div><div class="stat-label">EW pro Hektar</div></div>
+            </div>
+            <div class="steckbrief-source">Quelle: Open Data München · Stand 31.12.2024</div>
+          </div>`;
+      }
+    } catch(e) { /* Bezirkdaten optional */ }
+  }
 
   const chartCards = isStadtrat ? `
     <div class="chart-card"><div class="chart-title">Sitze nach Fraktion</div><div class="chart-wrap"><canvas id="chart-fraktion"></canvas></div></div>
@@ -269,7 +304,7 @@ function renderAuswertung(data, gremium) {
     <div class="chart-card"><div class="chart-title">Kontaktdaten-Abdeckung</div><div class="chart-wrap"><canvas id="chart-kontakt"></canvas></div></div>
   `;
 
-  document.getElementById('content').innerHTML = `<div class="charts-grid">${chartCards}</div>`;
+  document.getElementById('content').innerHTML = bezirkHtml + `<div class="charts-grid">${chartCards}</div>`;
 
   const chartDefaults = {
     plugins: { legend: { labels: { color: '#74788a', font: { size: 12 } } } }
@@ -473,7 +508,7 @@ async function render() {
     const data = await fetchGremium(gremium.csvFile);
     renderStats(data, gremium);
     if (actualTab === 'liste') renderListe(data, gremium);
-    else renderAuswertung(data, gremium);
+    else await renderSteckbrief(data, gremium);
   } catch(e) {
     showError(`Fehler beim Laden: ${e.message}`);
     console.error(e);

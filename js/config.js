@@ -6,7 +6,7 @@ const GREMIEN = [
     full:    'Stadtrat München 2026',
     csvFile: 'data/stadtrat.csv',
     type:    'stadtrat',
-    tabs:    ['liste', 'auswertung', 'netzwerkkarte'],
+    tabs:    ['liste', 'steckbrief', 'netzwerkkarte'],
   },
   { slug: 'ba01', name: 'BA 01', full: 'BA 01 · Altstadt-Lehel',                                         csvFile: 'data/ba01.csv', type: 'ba', baNum: 1  },
   { slug: 'ba02', name: 'BA 02', full: 'BA 02 · Ludwigsvorstadt-Isarvorstadt',                            csvFile: 'data/ba02.csv', type: 'ba', baNum: 2  },
