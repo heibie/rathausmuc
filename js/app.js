@@ -23,8 +23,10 @@ let _leafletMap = null;
 
 function initBezirkMap(features) {
   if (_leafletMap) { _leafletMap.remove(); _leafletMap = null; }
-  const container = document.getElementById('bezirk-map');
-  if (!container) return;
+  if (!document.getElementById('bezirk-map')) return;
+
+  // Bounds vorab berechnen, bevor die Map initialisiert wird
+  const bounds = L.geoJSON({ type: 'FeatureCollection', features }).getBounds();
 
   _leafletMap = L.map('bezirk-map', {
     zoomControl: false,
@@ -32,19 +34,22 @@ function initBezirkMap(features) {
     doubleClickZoom: false,
     touchZoom: false,
     dragging: false,
-    attributionControl: true,
+    attributionControl: false,
   });
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OSM</a> © <a href="https://carto.com/">CARTO</a>',
     maxZoom: 19,
   }).addTo(_leafletMap);
 
-  const geoLayer = L.geoJSON({ type: 'FeatureCollection', features }, {
+  L.geoJSON({ type: 'FeatureCollection', features }, {
     style: { color: '#111111', weight: 2, fillColor: '#FFCC00', fillOpacity: 0.45 },
   }).addTo(_leafletMap);
 
-  _leafletMap.fitBounds(geoLayer.getBounds(), { padding: [24, 24] });
+  // Nach Browser-Layout-Pass einpassen, damit die Container-Größe bekannt ist
+  requestAnimationFrame(() => {
+    _leafletMap.invalidateSize();
+    _leafletMap.fitBounds(bounds, { padding: [20, 20] });
+  });
 }
 
 async function fetchGremium(csvFile) {
