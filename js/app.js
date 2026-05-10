@@ -24,6 +24,7 @@ let _leafletMap    = null;
 let _homeMap       = null;
 let _sortedData    = [];
 let _lastIsStadtrat = false;
+let _bmPersons     = {};
 
 function initBezirkMap(allFeatures, activeBaNum) {
   if (_leafletMap) { _leafletMap.remove(); _leafletMap = null; }
@@ -277,6 +278,40 @@ function showMemberPopup(idx, el) {
   }
 
   // Desktop: rechts vom Avatar, mit Fallback nach links
+  const pw = popup.offsetWidth || 296;
+  const ph = popup.offsetHeight || 300;
+  let x = rect.right + 8;
+  if (x + pw > vw - 8) x = rect.left - pw - 8;
+  if (x < 8) x = 8;
+  let y = rect.top;
+  if (y + ph > vh - 8) y = vh - ph - 8;
+  if (y < 8) y = 8;
+  popup.style.left = x + 'px';
+  popup.style.top  = y + 'px';
+}
+
+function showBmPopup(nr, el) {
+  const row = _bmPersons[nr];
+  if (!row) return;
+  cancelHidePopup();
+  const popup = document.getElementById('member-popup');
+  if (!popup) return;
+  popup.innerHTML = buildMemberPopup(row, true);
+  popup.style.width = '';
+  popup.style.display = 'block';
+
+  const rect = el.getBoundingClientRect();
+  const vw = window.innerWidth, vh = window.innerHeight;
+
+  if (vw <= 540) {
+    const mw = Math.min(296, vw - 24);
+    popup.style.width = mw + 'px';
+    const ph = popup.offsetHeight || 350;
+    popup.style.left = Math.round((vw - mw) / 2) + 'px';
+    popup.style.top  = Math.max(60, Math.round((vh - ph) / 2)) + 'px';
+    return;
+  }
+
   const pw = popup.offsetWidth || 296;
   const ph = popup.offsetHeight || 300;
   let x = rect.right + 8;
@@ -631,15 +666,17 @@ async function renderSteckbrief(data, gremium) {
 
       // Stadtspitze: OB + 2. + 3. Bürgermeister*in via "Bürgermeister"-Spalte (Werte 1, 2, 3)
       const BUERGERMEISTER_LABELS = { '1': 'OB', '2': '2. BM', '3': '3. BM' };
+      _bmPersons = {};
       const stadtspitzePersons = ['1','2','3'].map(nr => {
         const p = data.find(d => (d['Bürgermeister'] || '').trim() === nr);
         const rolle = BUERGERMEISTER_LABELS[nr];
         if (p) {
+          _bmPersons[nr] = p;
           const ini = ((p['Vorname']||'')[0]||'') + ((p['Nachname']||'')[0]||'');
           const av = p['Image']
             ? `<img class="sp-avatar" src="${p['Image']}" alt="${ini}">`
             : `<div class="sp-avatar sp-ph">${ini}</div>`;
-          return `<div class="sp-person">${av}<div class="sp-name">${p['Vorname']||''} ${p['Nachname']||''}</div><div class="sp-rolle">${rolle}</div></div>`;
+          return `<div class="sp-person" style="cursor:pointer" onmouseenter="showBmPopup('${nr}',this)" onmouseleave="scheduleHidePopup()">${av}<div class="sp-name">${p['Vorname']||''} ${p['Nachname']||''}</div><div class="sp-rolle">${rolle}</div></div>`;
         }
         return `<div class="sp-person"><div class="sp-avatar sp-ph sp-empty"></div><div class="sp-name sp-name-empty">–</div><div class="sp-rolle">${rolle}</div></div>`;
       }).join('');
