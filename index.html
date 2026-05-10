@@ -587,6 +587,28 @@
     .nav-dropdown:focus-within .ba-menu {
       visibility: visible; opacity: 1; pointer-events: auto; transition-delay: 0s;
     }
+
+    /* ── Footer ──────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .footer-copy { font-size: 12px; color: var(--text-light); }
+    .footer-links { display: flex; gap: 4px; margin-left: auto; }
+    .footer-link {
+      font-size: 12px; color: var(--text-dim); text-decoration: none;
+      padding: 4px 8px; border-radius: 4px;
+      transition: color .12s, background .12s;
+    }
+    .footer-link:hover { color: var(--text); background: var(--bg); }
+    @media (max-width: 480px) {
+      footer { padding: 14px 16px; flex-wrap: wrap; gap: 8px; }
+      .footer-links { margin-left: 0; }
+    }
   </style>
 </head>
 <body>
@@ -612,6 +634,14 @@
 </main>
 
 <div id="member-popup" style="display:none" onmouseenter="cancelHidePopup()" onmouseleave="scheduleHidePopup()"></div>
+
+<footer>
+  <span class="footer-copy">© RATHAUS MUC</span>
+  <div class="footer-links">
+    <a class="footer-link" href="ueber.html">Über</a>
+    <a class="footer-link" href="impressum.html">Impressum</a>
+  </div>
+</footer>
 
 <script src="js/config.js"></script>
 <script src="js/app.js"></script>

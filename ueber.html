@@ -112,6 +112,23 @@
     @media (max-width: 600px) {
       .header-links { display: none; }
     }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px; margin-top: 16px;
+    }
+    .footer-copy { font-size: 12px; color: var(--text-light); }
+    .footer-links { display: flex; gap: 4px; margin-left: auto; }
+    .footer-link {
+      font-size: 12px; color: var(--text-dim); text-decoration: none;
+      padding: 4px 8px; border-radius: 4px; transition: color .12s, background .12s;
+    }
+    .footer-link:hover { color: var(--text); background: var(--bg); }
+    .footer-link.active { color: var(--text); font-weight: 600; }
+    @media (max-width: 480px) {
+      footer { padding: 14px 16px; flex-wrap: wrap; gap: 8px; }
+      .footer-links { margin-left: 0; }
+    }
   </style>
 </head>
 <body>
@@ -181,6 +198,15 @@
 
   </div>
 </main>
+
+
+<footer>
+  <span class="footer-copy">© RATHAUS MUC</span>
+  <div class="footer-links">
+    <a class="footer-link active" href="ueber.html">Über</a>
+    <a class="footer-link" href="impressum.html">Impressum</a>
+  </div>
+</footer>
 
 </body>
 </html>

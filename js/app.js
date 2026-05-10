@@ -260,13 +260,25 @@ function showMemberPopup(idx, el) {
   const row = _sortedData[idx];
   if (!popup || !row) return;
   popup.innerHTML = buildMemberPopup(row, _lastIsStadtrat);
+  popup.style.width = '';
   popup.style.display = 'block';
 
-  // Position: right of avatar cell, aligned to top of cell
   const rect = el.getBoundingClientRect();
+  const vw = window.innerWidth, vh = window.innerHeight;
+
+  // Auf schmalen Screens: zentriert und volle nutzbare Breite
+  if (vw <= 540) {
+    const mw = Math.min(296, vw - 24);
+    popup.style.width = mw + 'px';
+    const ph = popup.offsetHeight || 350;
+    popup.style.left = Math.round((vw - mw) / 2) + 'px';
+    popup.style.top  = Math.max(60, Math.round((vh - ph) / 2)) + 'px';
+    return;
+  }
+
+  // Desktop: rechts vom Avatar, mit Fallback nach links
   const pw = popup.offsetWidth || 296;
   const ph = popup.offsetHeight || 300;
-  const vw = window.innerWidth, vh = window.innerHeight;
   let x = rect.right + 8;
   if (x + pw > vw - 8) x = rect.left - pw - 8;
   if (x < 8) x = 8;
@@ -734,10 +746,12 @@ async function renderSteckbrief(data, gremium) {
         const cx = (left+right)/2, cy = (top+bottom)/2;
         ctx.save();
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.font = '600 11px -apple-system,sans-serif'; ctx.fillStyle = '#74788a';
+        ctx.fillText('Koalition', cx, cy - 26);
         ctx.font = 'bold 28px -apple-system,sans-serif'; ctx.fillStyle = '#1c1e21';
-        ctx.fillText(coalitionSeats, cx, cy-10);
+        ctx.fillText(coalitionSeats, cx, cy - 4);
         ctx.font = '500 11px -apple-system,sans-serif'; ctx.fillStyle = '#74788a';
-        ctx.fillText(`von ${totalSeats} Sitzen`, cx, cy+12);
+        ctx.fillText(`von ${totalSeats} Sitzen`, cx, cy + 18);
         ctx.restore();
       }
     };
@@ -748,8 +762,9 @@ async function renderSteckbrief(data, gremium) {
         labels: frakSorted.map(e => `${shortFrak(e[0])} (${e[1]})`),
         datasets: [{ data: frakSorted.map(e => e[1]),
           backgroundColor: frakSorted.map(e => partyColor(e[0]).bg),
-          borderColor: frakSorted.map(e => isCoalition(e[0]) ? '#1c1e21' : '#fff'),
-          borderWidth: 1 }]
+          borderColor: frakSorted.map(e => isCoalition(e[0]) ? 'rgba(0,0,0,0.35)' : '#fff'),
+          borderWidth: frakSorted.map(e => isCoalition(e[0]) ? 2 : 1),
+          offset: frakSorted.map(e => isCoalition(e[0]) ? 10 : 0) }]
       },
       options: { ...chartDefaults, responsive: true, maintainAspectRatio: false,
         cutout: '58%', plugins: { legend: { display: false } } }
