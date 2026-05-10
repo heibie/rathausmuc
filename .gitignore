@@ -21,3 +21,4 @@ restructure_hoerspiele.py
 
 # Lokale Entwicklung
 *.log
+*.code-workspace
