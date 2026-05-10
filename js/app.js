@@ -696,8 +696,6 @@ async function renderSteckbrief(data, gremium) {
   ` : `
     <div class="chart-card"><div class="chart-title">Sitze nach Partei</div><div class="chart-wrap"><canvas id="chart-partei"></canvas></div></div>
     <div class="chart-card"><div class="chart-title">Geschlecht</div><div class="chart-wrap"><canvas id="chart-geschlecht"></canvas></div></div>
-    <div class="chart-card"><div class="chart-title">Social-Media-Präsenz</div><div class="chart-wrap"><canvas id="chart-social"></canvas></div></div>
-    <div class="chart-card"><div class="chart-title">Kontaktdaten-Abdeckung</div><div class="chart-wrap"><canvas id="chart-kontakt"></canvas></div></div>
   `;
 
   const sectionTitle = isStadtrat ? 'Statistiken zum Stadtrat' : 'Statistiken zum Bezirksausschuss';
