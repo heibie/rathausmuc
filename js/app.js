@@ -350,7 +350,7 @@ function renderSubNav(gremium, activeTab) {
 function renderStats(data, gremium) {
   const herr = data.filter(d => d['Geschlecht'] === 'Herr').length;
   const frau = data.filter(d => d['Geschlecht'] === 'Frau').length;
-  const hasSocial = d => d['Instagram'] || d['Facebook'] || d['LinkedIn'] || d['TikTok'] || d['Mastodon'];
+  const hasSocial = d => d['Instagram'] || d['Facebook'] || d['LinkedIn'] || d['TikTok'] || d['Bluesky'] || d['Threads'];
 
   const items = gremium.type === 'stadtrat'
     ? [
@@ -803,14 +803,14 @@ async function renderSteckbrief(data, gremium) {
   });
 
   // Social Media
-  const platforms = ['Instagram','Facebook','LinkedIn','TikTok','Mastodon'];
+  const platforms = ['Instagram','Facebook','LinkedIn','TikTok','Bluesky','Threads'];
   new Chart(document.getElementById('chart-social'), {
     type: 'bar',
     data: {
       labels: platforms,
       datasets: [{ label: 'Mitglieder',
         data: platforms.map(p => data.filter(d => d[p]).length),
-        backgroundColor: Object.values(SOCIAL_ICONS).map(i => i.color),
+        backgroundColor: platforms.map(p => SOCIAL_ICONS[p]?.color || '#ccc'),
         borderWidth: 0, borderRadius: 3 }]
     },
     options: { ...chartDefaults, responsive: true, maintainAspectRatio: false,
@@ -821,7 +821,7 @@ async function renderSteckbrief(data, gremium) {
   });
 
   // Kontaktdaten
-  const hasSocial = d => d['Instagram'] || d['Facebook'] || d['LinkedIn'] || d['TikTok'] || d['Mastodon'];
+  const hasSocial = d => d['Instagram'] || d['Facebook'] || d['LinkedIn'] || d['TikTok'] || d['Bluesky'] || d['Threads'];
   const kontaktLabels = isStadtrat ? ['Foto', 'E-Mail', 'Website', 'Social Media'] : ['E-Mail', 'Website', 'Social Media'];
   const kontaktData   = isStadtrat
     ? [data.filter(d => d['Image']).length, data.filter(d => d['E-Mail']).length, data.filter(d => d['Website']).length, data.filter(hasSocial).length]

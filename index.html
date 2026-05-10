@@ -312,7 +312,7 @@
     .table-empty { padding: 40px; text-align: center; color: var(--text-dim); font-size: 13px; }
 
     /* ── Steckbrief ─────────────────────────────────────────────────────── */
-    .steckbrief-group { margin-top: 16px; }
+    .steckbrief-group { margin-top: 20px; }
     .steckbrief-group:first-child { margin-top: 0; }
     .steckbrief-group + .steckbrief-group {
       border-top: 1px solid var(--border);
@@ -326,10 +326,11 @@
     .steckbrief-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px 14px;
+      gap: 8px;
     }
-    .steckbrief-stats .stat { border: none; box-shadow: none; padding: 0; }
+    .steckbrief-stats .stat { padding: 10px 12px; }
     .steckbrief-stats .stat-value { font-size: 20px; }
+    .steckbrief-stats .stat-label { font-size: 11px; }
     .steckbrief-source { font-size: 11px; color: var(--text-light); }
 
     /* Stats panel: fills row height, source pinned to bottom */
@@ -535,7 +536,8 @@
       .steckbrief-map-card { min-height: 280px; }
       #bezirk-map  { min-height: 280px; }
       #overview-map { min-height: 320px; }
-      .steckbrief-stats { grid-template-columns: repeat(3, 1fr); }
+      .steckbrief-stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .steckbrief-stats .stat { padding: 8px 10px; }
       .steckbrief-stats .stat-value { font-size: 18px; }
 
       .charts-grid { grid-template-columns: 1fr; gap: 12px; }
@@ -570,7 +572,8 @@
       .ba-grid { grid-template-columns: 1fr; }
       .ba-menu { min-width: calc(100vw - 24px); }
 
-      .steckbrief-stats { grid-template-columns: repeat(2, 1fr); }
+      .steckbrief-stats { grid-template-columns: repeat(2, 1fr); gap: 5px; }
+      .steckbrief-stats .stat { padding: 7px 9px; }
       .chart-wrap { height: 220px; }
 
       .sp-avatar { width: 44px; height: 44px; }
