@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RATHAUS MUC</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -83,6 +84,17 @@
     }
     .nav-item:hover  { color: var(--text); background: var(--bg); }
     .nav-item.active { color: var(--text); font-weight: 700; background: var(--bg); }
+
+    .header-links { margin-left: auto; display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .header-link {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: color .12s, background .12s;
+    }
+    .header-link:hover { color: var(--text); background: var(--bg); }
 
     /* Dropdown */
     .nav-dropdown { position: relative; }
@@ -559,6 +571,10 @@
   </a>
   <div class="header-divider"></div>
   <nav id="main-nav"></nav>
+  <div class="header-links">
+    <a class="header-link" href="ueber.html">Über</a>
+    <a class="header-link" href="impressum.html">Impressum</a>
+  </div>
 </header>
 
 <div id="sub-nav"></div>

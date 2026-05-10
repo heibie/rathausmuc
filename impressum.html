@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum – RATHAUS MUC</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --yellow: #FFCC00;
+      --black:  #111111;
+      --bg:     #f4f5f7;
+      --surface:#ffffff;
+      --border: #e4e6ea;
+      --text:   #1c1e21;
+      --text-dim:#74788a;
+      --radius: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 8px rgba(0,0,0,.04);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      min-height: 100vh;
+    }
+    header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--yellow);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .logo-mark .lm-city { background: var(--black); color: var(--yellow); padding: 4px 7px; border-radius: 4px 0 0 4px; }
+    .logo-mark .lm-rest { background: var(--yellow); color: var(--black); padding: 4px 7px; border-radius: 0 4px 4px 0; }
+    .header-divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+    nav { display: flex; align-items: center; gap: 4px; }
+    .nav-item {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color .12s, background .12s;
+    }
+    .nav-item:hover { color: var(--text); background: var(--bg); }
+    .header-links { margin-left: auto; display: flex; gap: 4px; }
+    .header-link {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: color .12s, background .12s;
+    }
+    .header-link:hover { color: var(--text); background: var(--bg); }
+    .header-link.active { color: var(--text); font-weight: 600; }
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    .page-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 36px 40px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--yellow);
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 24px 0 6px;
+      color: var(--text);
+    }
+    p {
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    a { color: var(--black); }
+    a:hover { color: #555; }
+    .text-dim { color: var(--text-dim); font-size: 13px; }
+    @media (max-width: 768px) {
+      header { padding: 0 16px; }
+      .page-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo-mark" href="index.html">
+    <span class="lm-city">RATHAUS</span><span class="lm-rest">MUC</span>
+  </a>
+  <div class="header-divider"></div>
+  <nav>
+    <a class="nav-item" href="index.html">Stadtrat</a>
+    <a class="nav-item" href="index.html#ba01/steckbrief">Bezirksausschüsse</a>
+  </nav>
+  <div class="header-links">
+    <a class="header-link" href="ueber.html">Über</a>
+    <a class="header-link active" href="impressum.html">Impressum</a>
+  </div>
+</header>
+
+<main>
+  <div class="page-card">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         IMPRESSUM – Inhalt hier bearbeiten
+    ════════════════════════════════════════════════════════════════════════ -->
+
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>Vorname Nachname</p>
+    <p>Musterstraße 1<br>80333 München</p>
+
+    <h2>Kontakt</h2>
+    <p>E-Mail: <a href="mailto:mail@example.de">mail@example.de</a></p>
+
+    <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+    <p>Vorname Nachname<br>Musterstraße 1<br>80333 München</p>
+
+    <h2>Haftungsausschluss</h2>
+    <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte wird keine Gewähr übernommen. Die dargestellten Daten stammen aus öffentlich zugänglichen Quellen (Münchner Stadtrat, Bezirksausschüsse).</p>
+
+    <h2>Datenschutz</h2>
+    <p>Diese Website verwendet keine Cookies und erhebt keine personenbezogenen Daten. Es werden keine externen Tracking-Dienste eingesetzt.</p>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         Ende Impressum
+    ════════════════════════════════════════════════════════════════════════ -->
+
+  </div>
+</main>
+
+</body>
+</html>

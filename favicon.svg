@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="5" fill="#111111"/>
+  <!-- Rathaus tower silhouette -->
+  <g fill="#FFCC00">
+    <!-- Spitze / Turm -->
+    <polygon points="16,2 18,7 14,7"/>
+    <rect x="14" y="7" width="4" height="2"/>
+    <!-- Uhrturm -->
+    <rect x="13" y="9" width="6" height="8"/>
+    <circle cx="16" cy="13" r="2" fill="#111111"/>
+    <circle cx="16" cy="13" r="1" fill="#FFCC00"/>
+    <!-- Hauptgebäude -->
+    <rect x="9" y="17" width="14" height="10"/>
+    <!-- Fenster links -->
+    <rect x="10" y="19" width="2" height="3" fill="#111111"/>
+    <rect x="13" y="19" width="2" height="3" fill="#111111"/>
+    <!-- Eingang Mitte -->
+    <rect x="15" y="21" width="4" height="6" fill="#111111"/>
+    <!-- Fenster rechts -->
+    <rect x="20" y="19" width="2" height="3" fill="#111111"/>
+  </g>
+</svg>
