@@ -85,17 +85,6 @@
     .nav-item:hover  { color: var(--text); background: var(--bg); }
     .nav-item.active { color: var(--text); font-weight: 700; background: var(--bg); }
 
-    .header-links { margin-left: auto; display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-    .header-link {
-      font-size: 12px;
-      color: var(--text-dim);
-      text-decoration: none;
-      padding: 4px 8px;
-      border-radius: 4px;
-      transition: color .12s, background .12s;
-    }
-    .header-link:hover { color: var(--text); background: var(--bg); }
-
     .nav-ba-short { display: none; }
     .nav-ba-full  { display: inline; }
 
@@ -547,7 +536,6 @@
     }
 
     @media (max-width: 600px) {
-      .header-links { display: none; }
       .nav-ba-full  { display: none; }
       .nav-ba-short { display: inline; }
     }
@@ -619,10 +607,6 @@
   </a>
   <div class="header-divider"></div>
   <nav id="main-nav"></nav>
-  <div class="header-links">
-    <a class="header-link" href="ueber.html">Über</a>
-    <a class="header-link" href="impressum.html">Impressum</a>
-  </div>
 </header>
 
 <div id="sub-nav"></div>
