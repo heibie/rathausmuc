@@ -676,7 +676,7 @@ async function renderSteckbrief(data, gremium) {
           const av = p['Image']
             ? `<img class="sp-avatar" src="${p['Image']}" alt="${ini}">`
             : `<div class="sp-avatar sp-ph">${ini}</div>`;
-          return `<div class="sp-person" style="cursor:pointer" onmouseenter="showBmPopup('${nr}',this)" onmouseleave="scheduleHidePopup()">${av}<div class="sp-name">${p['Vorname']||''} ${p['Nachname']||''}</div><div class="sp-rolle">${rolle}</div></div>`;
+          return `<div class="sp-person" style="cursor:pointer" onmouseenter="showBmPopup('${nr}',this.querySelector('.sp-avatar'))" onmouseleave="scheduleHidePopup()">${av}<div class="sp-name">${p['Vorname']||''} ${p['Nachname']||''}</div><div class="sp-rolle">${rolle}</div></div>`;
         }
         return `<div class="sp-person"><div class="sp-avatar sp-ph sp-empty"></div><div class="sp-name sp-name-empty">–</div><div class="sp-rolle">${rolle}</div></div>`;
       }).join('');
@@ -852,7 +852,9 @@ async function renderSteckbrief(data, gremium) {
       cutout: '58%', plugins: { legend: { labels: { color: '#74788a', font: { size: 12 } } } } }
   });
 
-  // Social Media
+  // Social Media + Kontaktdaten nur für Stadtrat (BA hat keine Daten dazu)
+  if (!isStadtrat) return;
+
   const platforms = ['Instagram','Facebook','LinkedIn','TikTok','Bluesky','Threads'];
   new Chart(document.getElementById('chart-social'), {
     type: 'bar',
