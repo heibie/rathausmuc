@@ -242,6 +242,7 @@ function buildMemberPopup(row, isStadtrat) {
   const bio = row['Bio'] || row['Beschreibung'] || '';
 
   return `
+    <button class="mp-close" onclick="document.getElementById('member-popup').style.display='none'" aria-label="Schließen">×</button>
     <div class="mp-head">
       ${avatarHtml}
       <div class="mp-identity">
@@ -326,7 +327,7 @@ function renderNav(activeSlug) {
   document.getElementById('main-nav').innerHTML = `
     <a class="nav-item${activeSlug === 'stadtrat' ? ' active' : ''}" href="#stadtrat/steckbrief">Stadtrat</a>
     <div class="nav-item nav-dropdown${isBA ? ' active' : ''}" tabindex="0">
-      <span class="nav-dropdown-label">Bezirksausschüsse <svg width="10" height="6" viewBox="0 0 10 6"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></span>
+      <span class="nav-dropdown-label"><span class="nav-ba-full">Bezirksausschüsse</span><span class="nav-ba-short">Bezirke</span> <svg width="10" height="6" viewBox="0 0 10 6"><path d="M0 0l5 6 5-6z" fill="currentColor"/></svg></span>
       <div class="ba-menu">
         <div class="ba-grid">${baItems}</div>
       </div>
@@ -617,7 +618,7 @@ async function renderSteckbrief(data, gremium) {
       const standJahr = addIndicators(groups, rz => rz === 'Stadt München', true);
 
       // Stadtspitze: OB + 2. + 3. Bürgermeister*in via "Bürgermeister"-Spalte (Werte 1, 2, 3)
-      const BUERGERMEISTER_LABELS = { '1': 'Oberbürgermeister', '2': '2. Bürgermeisterin', '3': '3. Bürgermeisterin' };
+      const BUERGERMEISTER_LABELS = { '1': 'OB', '2': '2. BM', '3': '3. BM' };
       const stadtspitzePersons = ['1','2','3'].map(nr => {
         const p = data.find(d => (d['Bürgermeister'] || '').trim() === nr);
         const rolle = BUERGERMEISTER_LABELS[nr];
