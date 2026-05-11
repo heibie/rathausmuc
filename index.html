@@ -26,6 +26,10 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html, body {
+      overflow-x: hidden;
+    }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -625,12 +629,12 @@
   <div id="content"></div>
 </main>
 
-<div id="member-popup" style="display:none" onmouseenter="cancelHidePopup()" onmouseleave="scheduleHidePopup()"></div>
+<div id="member-popup" style="display:none" onmouseenter="cancelHidePopup()" onmouseleave="scheduleHidePopup()" onclick="event.stopPropagation()"></div>
 
 <footer>
   <span class="footer-copy">© RATHAUS MUC</span>
   <div class="footer-links">
-    <a class="footer-link" href="ueber.html">Über</a>
+    <a class="footer-link" href="faq.html">FAQ</a>
     <a class="footer-link" href="impressum.html">Impressum</a>
   </div>
 </footer>

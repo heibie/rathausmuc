@@ -381,7 +381,8 @@ function renderNav(activeSlug) {
       <div class="ba-menu">
         <div class="ba-grid">${baItems}</div>
       </div>
-    </div>`;
+    </div>
+    <a class="nav-item" href="faq.html">FAQ</a>`;
 }
 
 // ─── Sub-Tabs ─────────────────────────────────────────────────────────────────
@@ -577,7 +578,7 @@ function renderTableBody(data, gremium) {
 
     return `<tr data-idx="${idx}">
       <td style="text-align:right;font-size:11px;color:var(--text-light);padding-right:10px">${idx + 1}</td>
-      ${isStadtrat ? `<td style="text-align:center;cursor:pointer" onmouseenter="showMemberPopup(${idx},this)" onmouseleave="scheduleHidePopup()">${avatar}</td>` : ''}
+      ${isStadtrat ? `<td style="text-align:center;cursor:pointer" onmouseenter="showMemberPopup(${idx},this)" onmouseleave="scheduleHidePopup()" onclick="event.stopPropagation();showMemberPopup(${idx},this)">${avatar}</td>` : ''}
       <td>${row['Nachname'] || ''}</td>
       <td>${row['Vorname'] || ''}</td>
       <td>${badge}</td>
@@ -679,7 +680,7 @@ async function renderSteckbrief(data, gremium) {
           const av = p['Image']
             ? `<img class="sp-avatar" src="${p['Image']}" alt="${ini}">`
             : `<div class="sp-avatar sp-ph">${ini}</div>`;
-          return `<div class="sp-person" style="cursor:pointer" onmouseenter="showBmPopup('${nr}',this.querySelector('.sp-avatar'))" onmouseleave="scheduleHidePopup()">${av}<div class="sp-name">${p['Vorname']||''} ${p['Nachname']||''}</div><div class="sp-rolle">${rolle}</div></div>`;
+          return `<div class="sp-person" style="cursor:pointer" onmouseenter="showBmPopup('${nr}',this.querySelector('.sp-avatar'))" onmouseleave="scheduleHidePopup()" onclick="event.stopPropagation();showBmPopup('${nr}',this.querySelector('.sp-avatar'))">${av}<div class="sp-name">${p['Vorname']||''} ${p['Nachname']||''}</div><div class="sp-rolle">${rolle}</div></div>`;
         }
         return `<div class="sp-person"><div class="sp-avatar sp-ph sp-empty"></div><div class="sp-name sp-name-empty">–</div><div class="sp-rolle">${rolle}</div></div>`;
       }).join('');
@@ -1164,3 +1165,12 @@ async function render() {
     console.error(e);
   }
 }
+
+// Popup bei Klick außerhalb schließen
+document.addEventListener("click", () => {
+  const p = document.getElementById("member-popup");
+  if (p && p.style.display !== "none") {
+    cancelHidePopup();
+    p.style.display = "none";
+  }
+});
