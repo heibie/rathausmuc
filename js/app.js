@@ -230,8 +230,7 @@ function buildMemberPopup(row, isStadtrat) {
     if (lv.startsWith('http')) {
       body += lnk('Lebenslauf', lv, 'Lebenslauf ↗');
     } else {
-      const short = lv.length > 280 ? lv.slice(0, 280).trimEnd() + ' …' : lv;
-      body += txt('Lebenslauf', short);
+      body += txt('Lebenslauf', lv);
     }
   }
 
@@ -266,7 +265,7 @@ function showMemberPopup(idx, el) {
   if (!popup || !row) return;
   popup.innerHTML = buildMemberPopup(row, _lastIsStadtrat);
   popup.style.width = '';
-  popup.style.display = 'block';
+  popup.style.display = 'flex';
 
   const rect = el.getBoundingClientRect();
   const vw = window.innerWidth, vh = window.innerHeight;
@@ -302,7 +301,7 @@ function showBmPopup(nr, el) {
   if (!popup) return;
   popup.innerHTML = buildMemberPopup(row, true);
   popup.style.width = '';
-  popup.style.display = 'block';
+  popup.style.display = 'flex';
 
   const rect = el.getBoundingClientRect();
   const vw = window.innerWidth, vh = window.innerHeight;
