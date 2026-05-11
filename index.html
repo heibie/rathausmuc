@@ -404,7 +404,9 @@
       position: fixed; z-index: 999;
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); box-shadow: 0 8px 32px rgba(0,0,0,.16);
-      padding: 16px 16px 16px 16px; width: 296px;
+      padding: 0; width: 296px;
+      display: flex; flex-direction: column;
+      max-height: min(88vh, 540px);
     }
     .mp-close {
       position: absolute; top: 8px; right: 8px;
@@ -414,7 +416,8 @@
       transition: color .1s, background .1s;
     }
     .mp-close:hover { color: var(--text); background: var(--bg); }
-    .mp-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 4px; }
+    .mp-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 4px; flex-shrink: 0; }
+    .mp-scroll { overflow-y: auto; flex: 1; min-height: 0; padding: 16px; padding-top: 0; }
     .mp-avatar {
       width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
       border: 2px solid var(--border); flex-shrink: 0;
@@ -431,12 +434,17 @@
     .mp-val { color: var(--text); word-break: break-word; }
     .mp-link { color: var(--text-dim); text-decoration: none; word-break: break-all; }
     .mp-link:hover { color: var(--text); text-decoration: underline; }
-    .mp-bio { font-size: 11px; color: var(--text-dim); line-height: 1.5; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); max-height: 80px; overflow-y: auto; }
+    .mp-bio { font-size: 11px; color: var(--text-dim); line-height: 1.5; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .mp-social-footer {
+      flex-shrink: 0; padding: 10px 16px;
+      border-top: 1px solid var(--border);
+      background: var(--bg); border-radius: 0 0 var(--radius) var(--radius);
+    }
     .mp-social-row { display: flex; flex-wrap: wrap; gap: 5px; }
     .mp-social-btn {
       display: inline-flex; align-items: center; gap: 4px; font-size: 11px;
       color: var(--text-dim); text-decoration: none; padding: 3px 7px;
-      background: var(--bg); border-radius: 4px; white-space: nowrap;
+      background: var(--surface); border-radius: 4px; white-space: nowrap;
     }
     .mp-social-btn:hover { color: var(--text); background: var(--border); }
 

@@ -227,9 +227,12 @@ function buildMemberPopup(row, isStadtrat) {
   if (row['RIS-Link'])      body += lnk('RIS', row['RIS-Link'], 'Profil im RIS ↗');
   if (row['Lebenslauf']) {
     const lv = row['Lebenslauf'];
-    body += lv.startsWith('http')
-      ? lnk('Lebenslauf', lv, 'Lebenslauf ↗')
-      : txt('Lebenslauf', lv);
+    if (lv.startsWith('http')) {
+      body += lnk('Lebenslauf', lv, 'Lebenslauf ↗');
+    } else {
+      const short = lv.length > 280 ? lv.slice(0, 280).trimEnd() + ' …' : lv;
+      body += txt('Lebenslauf', short);
+    }
   }
 
   const socialBtns = Object.entries(SOCIAL_ICONS)
@@ -237,22 +240,23 @@ function buildMemberPopup(row, isStadtrat) {
     .map(([field, ic]) =>
       `<a class="mp-social-btn" href="${row[field]}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="12" height="12" fill="${ic.color}"><path d="${ic.path}"/></svg>${ic.label}</a>`)
     .join('');
-  if (socialBtns) body += `<div class="mp-row mp-row-wrap"><span class="mp-key">Social</span><span class="mp-social-row">${socialBtns}</span></div>`;
 
-  // Bio / Beschreibung (falls eigene Spalte vorhanden)
   const bio = row['Bio'] || row['Beschreibung'] || '';
 
   return `
     <button class="mp-close" onclick="document.getElementById('member-popup').style.display='none'" aria-label="Schließen">×</button>
-    <div class="mp-head">
-      ${avatarHtml}
-      <div class="mp-identity">
-        <div class="mp-name">${v} ${n}</div>
-        ${badge}${fraktion}${geschlecht}
+    <div class="mp-scroll">
+      <div class="mp-head" style="padding-top:16px">
+        ${avatarHtml}
+        <div class="mp-identity">
+          <div class="mp-name">${v} ${n}</div>
+          ${badge}${fraktion}${geschlecht}
+        </div>
       </div>
+      ${body ? `<div class="mp-body">${body}</div>` : ''}
+      ${bio ? `<div class="mp-bio">${bio}</div>` : ''}
     </div>
-    ${body ? `<div class="mp-body">${body}</div>` : ''}
-    ${bio ? `<div class="mp-bio">${bio}</div>` : ''}`;
+    ${socialBtns ? `<div class="mp-social-footer"><div class="mp-social-row">${socialBtns}</div></div>` : ''}`;
 }
 
 function showMemberPopup(idx, el) {
