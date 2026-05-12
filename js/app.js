@@ -1098,25 +1098,23 @@ function renderNetzwerkkarte() {
         <iframe src="https://embed.kumu.io/7f9bf138804a5aa8b4dbad96a0372e37"
                 allowfullscreen
                 title="Netzwerkkarte Stadtrat München"></iframe>
-        <div class="kumu-overlay" title="Klicken zum Aktivieren des Scrollrad-Zooms">
-          <span class="kumu-overlay-hint">🖱 Klicken zum Aktivieren</span>
+        <div class="kumu-hint">
+          <span class="kumu-hint-badge">Klicken + Scrollrad zum Zoomen</span>
         </div>
       </div>
     </div>`;
 
-  const overlay = document.querySelector('.kumu-overlay');
-  overlay.addEventListener('click', () => {
-    overlay.style.opacity = '0';
-    overlay.style.pointerEvents = 'none';
+  const card = document.querySelector('.kumu-card');
+  const hint = document.querySelector('.kumu-hint');
+  card.addEventListener('mouseenter', () => {
     document.documentElement.style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
   });
-  document.querySelector('.kumu-wrap').addEventListener('mouseleave', () => {
-    overlay.style.opacity = '';
-    overlay.style.pointerEvents = '';
+  card.addEventListener('mouseleave', () => {
     document.documentElement.style.overflowY = '';
     document.body.style.overflowY = '';
   });
+  card.addEventListener('click', () => { hint.style.opacity = '0'; }, { once: true });
 }
 
 // ─── Loading / Error ──────────────────────────────────────────────────────────
