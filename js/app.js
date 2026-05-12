@@ -343,7 +343,7 @@ async function fetchGremium(csvFile) {
   if (!res.ok) throw new Error(`CSV nicht gefunden: ${csvFile} (${res.status})`);
   const text = await res.text();
   const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
-  const persons = data.filter(r => r['Type'] !== 'Fraktion');
+  const persons = data.filter(r => r['Type'] === 'Person' || !r['Type']);
   dataCache[csvFile] = persons;
   return persons;
 }
