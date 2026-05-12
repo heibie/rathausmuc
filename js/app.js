@@ -1155,6 +1155,12 @@ async function render() {
   renderNav(gremium.slug);
   renderSubNav(gremium, actualTab);
 
+  if (window._paq) {
+    window._paq.push(['setCustomUrl', window.location.href]);
+    window._paq.push(['setDocumentTitle', gremium.full + (actualTab !== gremium.tabs?.[0] ? ' · ' + actualTab : '')]);
+    window._paq.push(['trackPageView']);
+  }
+
   if (actualTab === 'netzwerkkarte') {
     renderNetzwerkkarte();
     return;
