@@ -392,12 +392,23 @@
 
     /* ── Netzwerkkarte ───────────────────────────────────────────────────── */
     .kumu-wrap {
+      position: relative;
       overflow: hidden;
       height: calc(100vh - 108px);
       min-height: 500px;
       margin: 0 -32px;
     }
     .kumu-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+    .kumu-overlay {
+      position: absolute; inset: 0; z-index: 1; cursor: pointer;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 24px;
+    }
+    .kumu-overlay-hint {
+      background: rgba(0,0,0,.55); color: #fff; font-size: 12px; font-weight: 500;
+      padding: 6px 14px; border-radius: 20px; pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
     @media (max-width: 768px) { .kumu-wrap { margin-left: -16px; margin-right: -16px; } }
     @media (max-width: 480px) { .kumu-wrap { margin-left: -12px; margin-right: -12px; min-height: 400px; } }
 

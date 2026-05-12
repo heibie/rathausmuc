@@ -1089,29 +1089,34 @@ async function renderSozialwall(data) {
 
 // ─── Netzwerkkarte ────────────────────────────────────────────────────────────
 function renderNetzwerkkarte() {
-  document.getElementById('stats-bar').innerHTML = '';
-  document.querySelector('main').style.paddingTop = '0';
-  document.querySelector('main').style.paddingBottom = '0';
+  const statsBar = document.getElementById('stats-bar');
+  statsBar.innerHTML = '';
+  statsBar.style.padding = '0';
+  const mainEl = document.querySelector('main');
+  mainEl.style.paddingTop = '0';
+  mainEl.style.paddingBottom = '0';
+
   document.getElementById('content').innerHTML = `
     <div class="kumu-wrap">
       <iframe src="https://embed.kumu.io/9a1e09b8149f9899c5541bb96440eeed"
               allowfullscreen
               title="Netzwerkkarte Stadtrat München"></iframe>
+      <div class="kumu-overlay" title="Klicken zum Aktivieren des Scrollrad-Zooms">
+        <span class="kumu-overlay-hint">🖱 Klicken zum Aktivieren</span>
+      </div>
     </div>`;
 
-  const wrap = document.querySelector('.kumu-wrap');
-  const iframe = wrap?.querySelector('iframe');
-  if (wrap && iframe) {
-    wrap.addEventListener('mouseenter', () => {
-      iframe.focus();
-      document.documentElement.style.overflowY = 'hidden';
-      document.body.style.overflowY = 'hidden';
-    });
-    wrap.addEventListener('mouseleave', () => {
-      document.documentElement.style.overflowY = '';
-      document.body.style.overflowY = '';
-    });
-  }
+  const overlay = document.querySelector('.kumu-overlay');
+  overlay.addEventListener('click', () => {
+    overlay.style.display = 'none';
+    document.documentElement.style.overflowY = 'hidden';
+    document.body.style.overflowY = 'hidden';
+  });
+  document.querySelector('.kumu-wrap').addEventListener('mouseleave', () => {
+    overlay.style.display = '';
+    document.documentElement.style.overflowY = '';
+    document.body.style.overflowY = '';
+  });
 }
 
 // ─── Loading / Error ──────────────────────────────────────────────────────────
