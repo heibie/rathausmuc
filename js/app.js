@@ -1108,12 +1108,14 @@ function renderNetzwerkkarte() {
 
   const overlay = document.querySelector('.kumu-overlay');
   overlay.addEventListener('click', () => {
-    overlay.style.display = 'none';
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
     document.documentElement.style.overflowY = 'hidden';
     document.body.style.overflowY = 'hidden';
   });
   document.querySelector('.kumu-wrap').addEventListener('mouseleave', () => {
-    overlay.style.display = '';
+    overlay.style.opacity = '';
+    overlay.style.pointerEvents = '';
     document.documentElement.style.overflowY = '';
     document.body.style.overflowY = '';
   });
