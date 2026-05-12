@@ -225,8 +225,8 @@ function buildMemberPopup(row, isStadtrat) {
   if (row['E-Mail'])        body += `<div class="mp-row"><span class="mp-key">E-Mail</span><a class="mp-link" href="mailto:${row['E-Mail']}">${row['E-Mail']}</a></div>`;
   if (row['Website'])       body += lnk('Website', row['Website'], row['Website'].replace(/^https?:\/\//, '').replace(/\/$/, '').slice(0, 38));
   if (row['RIS-Link'])      body += lnk('RIS', row['RIS-Link'], 'Profil im RIS ↗');
-  if (row['Lebenslauf']) {
-    const lv = row['Lebenslauf'];
+  if (row['Description']) {
+    const lv = row['Description'];
     if (lv.startsWith('http')) {
       body += lnk('Lebenslauf', lv, 'Lebenslauf ↗');
     } else {
@@ -343,8 +343,9 @@ async function fetchGremium(csvFile) {
   if (!res.ok) throw new Error(`CSV nicht gefunden: ${csvFile} (${res.status})`);
   const text = await res.text();
   const { data } = Papa.parse(text, { header: true, skipEmptyLines: true });
-  dataCache[csvFile] = data;
-  return data;
+  const persons = data.filter(r => r['Type'] !== 'Fraktion');
+  dataCache[csvFile] = persons;
+  return persons;
 }
 
 // ─── Router ──────────────────────────────────────────────────────────────────
@@ -1092,9 +1093,6 @@ function renderNetzwerkkarte() {
   const statsBar = document.getElementById('stats-bar');
   statsBar.innerHTML = '';
   statsBar.style.padding = '0';
-  const mainEl = document.querySelector('main');
-  mainEl.style.paddingTop = '0';
-  mainEl.style.paddingBottom = '0';
 
   document.getElementById('content').innerHTML = `
     <div class="kumu-wrap">
