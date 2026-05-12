@@ -1090,13 +1090,11 @@ async function renderSozialwall(data) {
 
 // ─── Netzwerkkarte ────────────────────────────────────────────────────────────
 function renderNetzwerkkarte() {
-  const statsBar = document.getElementById('stats-bar');
-  statsBar.innerHTML = '';
-  statsBar.style.padding = '0';
+  document.getElementById('stats-bar').innerHTML = '';
 
   document.getElementById('content').innerHTML = `
     <div class="kumu-wrap">
-      <iframe src="https://embed.kumu.io/b1edf73a5f4ec0b9dd698c6674186886"
+      <iframe src="https://embed.kumu.io/7f9bf138804a5aa8b4dbad96a0372e37"
               allowfullscreen
               title="Netzwerkkarte Stadtrat München"></iframe>
       <div class="kumu-overlay" title="Klicken zum Aktivieren des Scrollrad-Zooms">
