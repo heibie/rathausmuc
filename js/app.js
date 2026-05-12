@@ -1091,21 +1091,9 @@ async function renderSozialwall(data) {
 function renderNetzwerkkarte() {
   document.getElementById('content').innerHTML = `
     <div class="kumu-wrap">
-      <div class="kumu-placeholder">
-        <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="4" fill="#1c1e21"/>
-          <circle cx="10" cy="16" r="3" fill="#e4e6ea"/>
-          <circle cx="38" cy="16" r="3" fill="#e4e6ea"/>
-          <circle cx="10" cy="34" r="3" fill="#e4e6ea"/>
-          <circle cx="38" cy="34" r="3" fill="#e4e6ea"/>
-          <line x1="24" y1="24" x2="10" y2="16" stroke="#e4e6ea" stroke-width="1.5"/>
-          <line x1="24" y1="24" x2="38" y2="16" stroke="#e4e6ea" stroke-width="1.5"/>
-          <line x1="24" y1="24" x2="10" y2="34" stroke="#e4e6ea" stroke-width="1.5"/>
-          <line x1="24" y1="24" x2="38" y2="34" stroke="#e4e6ea" stroke-width="1.5"/>
-        </svg>
-        <p>Kumu-Netzwerkkarte</p>
-        <p>Embed-URL in js/config.js eintragen</p>
-      </div>
+      <iframe src="https://embed.kumu.io/9a1e09b8149f9899c5541bb96440eeed"
+              allowfullscreen loading="lazy"
+              title="Netzwerkkarte Stadtrat München"></iframe>
     </div>`;
 }
 
