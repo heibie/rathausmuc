@@ -1089,17 +1089,28 @@ async function renderSozialwall(data) {
 
 // ─── Netzwerkkarte ────────────────────────────────────────────────────────────
 function renderNetzwerkkarte() {
+  document.getElementById('stats-bar').innerHTML = '';
+  document.querySelector('main').style.paddingTop = '0';
+  document.querySelector('main').style.paddingBottom = '0';
   document.getElementById('content').innerHTML = `
     <div class="kumu-wrap">
       <iframe src="https://embed.kumu.io/9a1e09b8149f9899c5541bb96440eeed"
-              allowfullscreen loading="lazy"
+              allowfullscreen
               title="Netzwerkkarte Stadtrat München"></iframe>
     </div>`;
 
   const wrap = document.querySelector('.kumu-wrap');
-  if (wrap) {
-    wrap.addEventListener('mouseenter', () => { document.documentElement.style.overflow = 'hidden'; });
-    wrap.addEventListener('mouseleave', () => { document.documentElement.style.overflow = ''; });
+  const iframe = wrap?.querySelector('iframe');
+  if (wrap && iframe) {
+    wrap.addEventListener('mouseenter', () => {
+      iframe.focus();
+      document.documentElement.style.overflowY = 'hidden';
+      document.body.style.overflowY = 'hidden';
+    });
+    wrap.addEventListener('mouseleave', () => {
+      document.documentElement.style.overflowY = '';
+      document.body.style.overflowY = '';
+    });
   }
 }
 
@@ -1116,6 +1127,11 @@ function showError(msg) {
 // ─── Render ───────────────────────────────────────────────────────────────────
 async function render() {
   const { slug, tabRaw } = parseHash();
+  // Padding zurücksetzen (könnte von Netzwerkkarte übrig sein)
+  const mainEl = document.querySelector('main');
+  if (mainEl) { mainEl.style.paddingTop = ''; mainEl.style.paddingBottom = ''; }
+  document.documentElement.style.overflowY = '';
+  document.body.style.overflowY = '';
 
   if (slug === 'home') {
     navigate('stadtrat', 'steckbrief');
