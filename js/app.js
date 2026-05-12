@@ -1093,12 +1093,14 @@ function renderNetzwerkkarte() {
   document.getElementById('stats-bar').innerHTML = '';
 
   document.getElementById('content').innerHTML = `
-    <div class="kumu-wrap">
-      <iframe src="https://embed.kumu.io/7f9bf138804a5aa8b4dbad96a0372e37"
-              allowfullscreen
-              title="Netzwerkkarte Stadtrat München"></iframe>
-      <div class="kumu-overlay" title="Klicken zum Aktivieren des Scrollrad-Zooms">
-        <span class="kumu-overlay-hint">🖱 Klicken zum Aktivieren</span>
+    <div class="kumu-card">
+      <div class="kumu-wrap">
+        <iframe src="https://embed.kumu.io/7f9bf138804a5aa8b4dbad96a0372e37"
+                allowfullscreen
+                title="Netzwerkkarte Stadtrat München"></iframe>
+        <div class="kumu-overlay" title="Klicken zum Aktivieren des Scrollrad-Zooms">
+          <span class="kumu-overlay-hint">🖱 Klicken zum Aktivieren</span>
+        </div>
       </div>
     </div>`;
 

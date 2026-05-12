@@ -391,12 +391,16 @@
     .chart-wrap { position: relative; height: 280px; }
 
     /* ── Netzwerkkarte ───────────────────────────────────────────────────── */
-    .kumu-wrap {
-      position: relative;
+    .kumu-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
       overflow: hidden;
       height: calc(100vh - 148px);
       min-height: 500px;
-      margin: 0 -32px;
+    }
+    .kumu-wrap {
+      position: relative;
+      width: 100%; height: 100%;
     }
     .kumu-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
     .kumu-overlay {
@@ -410,8 +414,7 @@
       padding: 6px 14px; border-radius: 20px; pointer-events: none;
       backdrop-filter: blur(4px);
     }
-    @media (max-width: 768px) { .kumu-wrap { margin-left: -16px; margin-right: -16px; } }
-    @media (max-width: 480px) { .kumu-wrap { margin-left: -12px; margin-right: -12px; min-height: 400px; } }
+    @media (max-width: 480px) { .kumu-card { min-height: 400px; } }
 
     /* ── Stadtspitze ────────────────────────────────────────────────────── */
     .stadtspitze { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
