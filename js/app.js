@@ -1098,7 +1098,7 @@ function renderNetzwerkkarte() {
 
   document.getElementById('content').innerHTML = `
     <div class="kumu-wrap">
-      <iframe src="https://embed.kumu.io/9a1e09b8149f9899c5541bb96440eeed"
+      <iframe src="https://embed.kumu.io/b1edf73a5f4ec0b9dd698c6674186886"
               allowfullscreen
               title="Netzwerkkarte Stadtrat München"></iframe>
       <div class="kumu-overlay" title="Klicken zum Aktivieren des Scrollrad-Zooms">
