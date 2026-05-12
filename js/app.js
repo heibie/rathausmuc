@@ -1095,6 +1095,12 @@ function renderNetzwerkkarte() {
               allowfullscreen loading="lazy"
               title="Netzwerkkarte Stadtrat München"></iframe>
     </div>`;
+
+  const wrap = document.querySelector('.kumu-wrap');
+  if (wrap) {
+    wrap.addEventListener('mouseenter', () => { document.documentElement.style.overflow = 'hidden'; });
+    wrap.addEventListener('mouseleave', () => { document.documentElement.style.overflow = ''; });
+  }
 }
 
 // ─── Loading / Error ──────────────────────────────────────────────────────────
