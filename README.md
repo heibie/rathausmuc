@@ -130,3 +130,4 @@ Matomo Analytics, Site-ID 13, gehostet auf `piwik.bielinski.de`. SPA-Tracking: j
 ## Daten & Lizenz
 
 Personendaten aus dem RIS stehen unter den Nutzungsbedingungen der LHM. Open-Data-Indikatoren: [Datenlizenz Deutschland – Namensnennung 2.0](https://www.govdata.de/dl-de/by-2-0).
+
