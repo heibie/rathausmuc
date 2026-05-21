@@ -153,6 +153,41 @@
     }
     .footer-link:hover { color: var(--text); background: var(--bg); }
     .footer-link.active { color: var(--text); font-weight: 600; }
+
+    /* Datensatz-Tabelle */
+    .section-rule {
+      border: none; border-top: 1px solid var(--border);
+      margin: 28px 0 24px;
+    }
+    .data-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; margin-top: 10px;
+    }
+    .data-table th {
+      text-align: left; font-size: 11px; font-weight: 600;
+      color: var(--text-dim); text-transform: uppercase; letter-spacing: .06em;
+      padding: 6px 10px; border-bottom: 2px solid var(--border);
+    }
+    .data-table td {
+      padding: 9px 10px; border-bottom: 1px solid var(--border);
+      vertical-align: top; line-height: 1.55;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table code {
+      font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px;
+      background: var(--bg); padding: 1px 5px; border-radius: 3px;
+      white-space: nowrap;
+    }
+    .data-table .col-file { width: 200px; }
+    .data-table .col-source { width: 170px; }
+    .data-table .col-stand { width: 100px; white-space: nowrap; }
+    .ds-group {
+      font-size: 10px; font-weight: 700; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: .07em;
+      padding: 10px 10px 4px; border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
     @media (max-width: 480px) {
       footer { padding: 14px 16px; flex-wrap: wrap; gap: 8px; }
       .footer-links { margin-left: 0; }
@@ -220,6 +255,103 @@
       Die Seite ist ein privates Projekt, das mir vor allem auch dazu dient die Möglichkeiten von KI-Tools auszuloten um Projektideen mit offenen Daten umzusetzen, die mir seit Jahren im Kopf herumschwirren, zu denen ich aber bisher nicht Zeit und/oder Know-How hatte. Es gibt hier also keine Garantie für Konstanz (die Beständigkeit, nicht die Stadt am Bodensee). Es kann auch wieder schnell vorbei sein.<br /><br />
 	  Stabile, langfristige Informationen zur Münchner Kommunalpolitik bietet seit Jahren <a href="https://www.muenchen-transparent.de">muenchen-transparent.de</a>, die das doch etwas sperrige Ratsinformationssystem zugänglicher aufbereiten und wo man u.a. alle Anträge aus Stadtrats- und BA-Sitzungen recherchieren kann.
     </p>
+
+    <hr class="section-rule">
+
+    <h1 style="margin-top:0">Offene Datensätze</h1>
+
+    <p>Alle Daten liegen als CSV-Dateien im <a href="https://github.com/heibie/rathausmuc/tree/main/data" target="_blank" rel="noopener">GitHub-Repository</a> und stehen unter <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> zur freien Nutzung bereit. Das Frictionless-Data-Schema ist in <a href="https://github.com/heibie/rathausmuc/blob/main/data/datapackage.json" target="_blank" rel="noopener"><code>datapackage.json</code></a> dokumentiert.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th class="col-file">Datei</th>
+          <th>Inhalt</th>
+          <th class="col-source">Quelle</th>
+          <th class="col-stand">Stand</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="4" class="ds-group">Stadtrat</td></tr>
+        <tr>
+          <td><code>stadtrat.csv</code></td>
+          <td>81 Mitglieder des Münchner Stadtrats, Wahlperiode 2026–2032. Name, Partei, Fraktion, Listenplatz, Stimmen, E-Mail, Website, Social-Media-Profile, RIS-ID, Bild-URL, Ausschuss-Zugehörigkeiten (19 Ausschüsse).</td>
+          <td><a href="https://risi.muenchen.de" target="_blank" rel="noopener">RIS München</a> + <a href="https://www.wahlen-muenchen.de" target="_blank" rel="noopener">wahlen-muenchen.de</a></td>
+          <td>Mai 2026</td>
+        </tr>
+
+        <tr><td colspan="4" class="ds-group">Bezirksausschüsse (BA 01–25)</td></tr>
+        <tr>
+          <td><code>ba01.csv</code> – <code>ba25.csv</code></td>
+          <td>Mitgliederlisten aller 25 Bezirksausschüsse. Gleiche Spaltenstruktur wie <code>stadtrat.csv</code> (ohne Fraktion und Ausschuss-Spalten).</td>
+          <td><a href="https://risi.muenchen.de" target="_blank" rel="noopener">RIS München</a> + <a href="https://www.wahlen-muenchen.de/ergebnisse/2_20260308bezirksausschusswahl/" target="_blank" rel="noopener">wahlen-muenchen.de</a></td>
+          <td>Mai 2026</td>
+        </tr>
+
+        <tr><td colspan="4" class="ds-group">Geodaten</td></tr>
+        <tr>
+          <td><code>bezirke.geojson</code></td>
+          <td>Polygone der 25 Münchner Stadtbezirke (WGS84). Grundlage für die interaktive Karte.</td>
+          <td><a href="https://opendata.muenchen.de" target="_blank" rel="noopener">Open Data LHM</a></td>
+          <td>2024</td>
+        </tr>
+
+        <tr><td colspan="4" class="ds-group">Bevölkerung &amp; Stadtstruktur (Open Data LHM)</td></tr>
+        <tr>
+          <td><code>bezirke_bevoelkerung.csv</code></td>
+          <td>Einwohnerzahl, Fläche (ha) und Einwohnerdichte je Stadtbezirk.</td>
+          <td rowspan="8"><a href="https://opendata.muenchen.de" target="_blank" rel="noopener">Open Data LHM</a></td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>motorisierungsgrad.csv</code></td>
+          <td>Zugelassene PKW je 1.000 Einwohner – stadtgesamte und bezirksweise Indikatorreihe.</td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>durchschnittsalter.csv</code></td>
+          <td>Durchschnittsalter der Bevölkerung je Stadtbezirk und gesamtstädtisch.</td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>einpersonenhaushalte.csv</code></td>
+          <td>Anteil Einpersonenhaushalte je Stadtbezirk (in %).</td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>altersgruppen.csv</code></td>
+          <td>Bevölkerungsverteilung nach Altersgruppen je Stadtbezirk.</td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>bevoelkerungsanteil.csv</code></td>
+          <td>Bevölkerungsanteil der Stadtbezirke an der Gesamtstadt (%).</td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>bevoelkerungsdichte.csv</code></td>
+          <td>Einwohner je ha je Stadtbezirk.</td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>flaechennutzung.csv</code></td>
+          <td>Flächennutzung (Wohnen, Gewerbe, Grün etc.) je Stadtbezirk.</td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>erstzulassung_pkw.csv</code></td>
+          <td>Neuzulassungen von PKW nach Stadtbezirk.</td>
+          <td><a href="https://opendata.muenchen.de" target="_blank" rel="noopener">Open Data LHM</a></td>
+          <td>2024</td>
+        </tr>
+        <tr>
+          <td><code>ueberalterungsquotient.csv</code></td>
+          <td>Verhältnis älterer Bevölkerungsgruppen zur erwerbsfähigen Bevölkerung je Bezirk.</td>
+          <td><a href="https://opendata.muenchen.de" target="_blank" rel="noopener">Open Data LHM</a></td>
+          <td>2024</td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- ═══════════════════════════════════════════════════════════════════
          Ende Über

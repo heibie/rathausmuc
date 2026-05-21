@@ -74,7 +74,10 @@ Hash-basiertes SPA-Routing in `js/app.js`:
 Hauptdatei mit 102 Zeilen (81 Personen + Fraktions-/Parteimetadaten für Kumu).
 
 **Spaltenstruktur (Auszug):**
-`Label, Type, Nachname, Vorname, Geschlecht, ID RIS, Partei, Fraktion, Bürgermeister, E-Mail, Website, Instagram, Facebook, LinkedIn, TikTok, Mastodon, RIS-Link, Image, Wahldatum, Mandatsbeginn, Listenplatz, Stimmen, Description, Ausschuss 1–8`
+`Label, Type, Nachname, Vorname, Geschlecht, ID RIS, Partei, Fraktion, Bürgermeister, E-Mail, Website, Instagram, Facebook, LinkedIn, TikTok, Mastodon, RIS-Link, Image, Wahldatum, Mandatsbeginn, Listenplatz, Stimmen, Description, Ausschuss 1–8, Ausschuesse`
+
+`Ausschuss 1`–`Ausschuss 8`: einzelne Ausschuss-Namen (bis zu 8 je Mitglied)  
+`Ausschuesse`: Pipe-separierte Gesamtliste, z. B. `Bildungsausschuss | Kulturausschuss | …`
 
 - `Type=Person` → Stadtratsmitglied (wird von der App angezeigt)
 - `Type=Fraktion` / `Type=Partei` → nur für Kumu-Netzwerkkarte, App filtert diese raus
