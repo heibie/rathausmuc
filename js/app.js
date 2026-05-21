@@ -26,6 +26,44 @@ let _sortedData    = [];
 let _lastIsStadtrat = false;
 let _bmPersons     = {};
 
+const AUSSCHUSS_SHORT = {
+  'Ausschuss für Arbeit und Wirtschaft':                'Arbeit & Wirtschaft',
+  'Ausschuss für Klima- und Umweltschutz':              'Klima & Umwelt',
+  'Ausschuss für Stadtplanung und Bauordnung':           'Stadtplanung',
+  'Bauausschuss':                                        'Bau',
+  'Bildungsausschuss':                                   'Bildung',
+  'Finanzausschuss':                                     'Finanzen',
+  'Gesundheitsausschuss':                                'Gesundheit',
+  'IT-Ausschuss':                                        'IT',
+  'Kinder- und Jugendhilfeausschuss':                    'Kinder & Jugend',
+  'Kommunalausschuss':                                   'Kommunal',
+  'Kreisverwaltungsausschuss':                           'Kreisverwaltung',
+  'Kulturausschuss':                                     'Kultur',
+  'Mobilitätsausschuss':                                 'Mobilität',
+  'Rechnungsprüfungsausschuss':                          'Rechnungsprüfung',
+  'Sozialausschuss':                                     'Soziales',
+  'Sportausschuss':                                      'Sport',
+  'Stadtentwässerungsausschuss':                         'Stadtentwässerung',
+  'Verwaltungs- und Personalausschuss':                  'Verwaltung & Personal',
+  'Verwaltungs- und Personalausschuss als Feriensenat':  'Verwaltung (Ferien)',
+};
+
+function renderAusschussTags(row) {
+  const raw = (row['Ausschuesse'] || '').trim();
+  if (!raw) return '<span class="td-empty">–</span>';
+  const names = raw.split(' | ').filter(Boolean);
+  const MAX_SHOW = 3;
+  const shown = names.slice(0, MAX_SHOW);
+  const extra = names.length - MAX_SHOW;
+  const tags = shown.map(n =>
+    `<span class="ausschuss-tag" title="${n}">${AUSSCHUSS_SHORT[n] || n}</span>`
+  ).join('');
+  const more = extra > 0
+    ? `<span class="ausschuss-tag ausschuss-more" title="${names.slice(MAX_SHOW).join(', ')}">+${extra}</span>`
+    : '';
+  return `<div class="ausschuss-tags">${tags}${more}</div>`;
+}
+
 function initBezirkMap(allFeatures, activeBaNum) {
   if (_leafletMap) { _leafletMap.remove(); _leafletMap = null; }
   if (!document.getElementById('bezirk-map')) return;
@@ -219,6 +257,8 @@ function buildMemberPopup(row, isStadtrat) {
     `<div class="mp-row"><span class="mp-key">${key}</span><a class="mp-link" href="${href}" target="_blank" rel="noopener">${label}</a></div>`;
 
   let body = '';
+  const aus = (row['Ausschuesse'] || '').split(' | ').filter(Boolean);
+  if (aus.length) body += `<div class="mp-row mp-row-wrap"><span class="mp-key">Ausschüsse</span><span class="mp-val">${aus.join(' · ')}</span></div>`;
   if (row['Listenplatz'])   body += txt('Listenplatz', row['Listenplatz']);
   if (row['Stimmen'])       body += txt('Stimmen', Number(row['Stimmen']).toLocaleString('de'));
   if (row['Gewählt am'])    body += txt('Gewählt am', row['Gewählt am']);
@@ -444,6 +484,7 @@ function renderListe(data, gremium) {
       <input type="search" class="search-input" id="search-name" placeholder="Name suchen…">
       ${isStadtrat ? `
       <select class="filter-select" id="filter-fraktion"><option value="">Alle Fraktionen</option></select>
+      <select class="filter-select" id="filter-ausschuss"><option value="">Alle Ausschüsse</option></select>
       ` : ''}
       <select class="filter-select" id="filter-partei"><option value="">Alle Parteien</option></select>
       <select class="filter-select" id="filter-geschlecht">
@@ -462,6 +503,7 @@ function renderListe(data, gremium) {
           <th class="sortable" data-field="Vorname">Vorname <span class="sort-arrow"></span></th>
           <th class="sortable" data-field="Partei" style="width:110px">Partei <span class="sort-arrow"></span></th>
           ${isStadtrat ? '<th class="sortable" data-field="Fraktion">Fraktion <span class="sort-arrow"></span></th>' : ''}
+          ${isStadtrat ? '<th style="min-width:180px">Ausschüsse</th>' : ''}
           <th class="sortable" data-field="Listenplatz" style="width:80px;text-align:center">Listenplatz <span class="sort-arrow"></span></th>
           <th class="sortable" data-field="Stimmen" style="width:90px;text-align:right">Stimmen <span class="sort-arrow"></span></th>
           <th style="width:200px">E-Mail</th>
@@ -478,6 +520,10 @@ function renderListe(data, gremium) {
     const fraktionen = [...new Set(data.map(d => d['Fraktion']).filter(Boolean))].sort();
     const sel = document.getElementById('filter-fraktion');
     fraktionen.forEach(f => sel.appendChild(new Option(f, f)));
+
+    const ausschussNames = Object.keys(AUSSCHUSS_SHORT).sort((a, b) => a.localeCompare(b, 'de'));
+    const aSel = document.getElementById('filter-ausschuss');
+    ausschussNames.forEach(n => aSel.appendChild(new Option(n, n)));
   }
   const parteien = [...new Set(data.map(d => d['Partei']).filter(Boolean))].sort();
   const pSel = document.getElementById('filter-partei');
@@ -500,12 +546,18 @@ function renderListe(data, gremium) {
   });
 
   document.getElementById('search-name').addEventListener('input', () => applyFilters(gremium));
-  if (isStadtrat) document.getElementById('filter-fraktion').addEventListener('change', () => applyFilters(gremium));
+  if (isStadtrat) {
+    document.getElementById('filter-fraktion').addEventListener('change', () => applyFilters(gremium));
+    document.getElementById('filter-ausschuss').addEventListener('change', () => applyFilters(gremium));
+  }
   document.getElementById('filter-partei').addEventListener('change', () => applyFilters(gremium));
   document.getElementById('filter-geschlecht').addEventListener('change', () => applyFilters(gremium));
   document.getElementById('btn-reset').addEventListener('click', () => {
     document.getElementById('search-name').value = '';
-    if (isStadtrat) document.getElementById('filter-fraktion').value = '';
+    if (isStadtrat) {
+      document.getElementById('filter-fraktion').value = '';
+      document.getElementById('filter-ausschuss').value = '';
+    }
     document.getElementById('filter-partei').value = '';
     document.getElementById('filter-geschlecht').value = '';
     applyFilters(gremium);
@@ -520,11 +572,13 @@ function applyFilters(gremium) {
   const partei     = document.getElementById('filter-partei').value;
   const geschlecht = document.getElementById('filter-geschlecht').value;
   const fraktion   = isStadtrat ? document.getElementById('filter-fraktion').value : '';
+  const ausschuss  = isStadtrat ? document.getElementById('filter-ausschuss').value : '';
 
   filteredData = allData.filter(row => {
     const fullName = `${row['Vorname'] || ''} ${row['Nachname'] || ''}`.toLowerCase();
     if (name && !fullName.includes(name)) return false;
     if (fraktion && row['Fraktion'] !== fraktion) return false;
+    if (ausschuss && !(row['Ausschuesse'] || '').split(' | ').includes(ausschuss)) return false;
     if (partei && row['Partei'] !== partei) return false;
     if (geschlecht && row['Geschlecht'] !== geschlecht) return false;
     return true;
@@ -584,6 +638,7 @@ function renderTableBody(data, gremium) {
       <td>${row['Vorname'] || ''}</td>
       <td>${badge}</td>
       ${isStadtrat ? `<td><span class="fraktion-text">${row['Fraktion'] || ''}</span></td>` : ''}
+      ${isStadtrat ? `<td>${renderAusschussTags(row)}</td>` : ''}
       <td style="text-align:center;color:var(--text-dim)">${row['Listenplatz'] || '<span class="td-empty">–</span>'}</td>
       <td style="text-align:right;color:var(--text-dim)">${row['Stimmen'] ? Number(row['Stimmen']).toLocaleString('de') : '<span class="td-empty">–</span>'}</td>
       <td>${email}</td>
