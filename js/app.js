@@ -52,16 +52,12 @@ function renderAusschussTags(row) {
   const raw = (row['Ausschuesse'] || '').trim();
   if (!raw) return '<span class="td-empty">–</span>';
   const names = raw.split(' | ').filter(Boolean);
-  const MAX_SHOW = 3;
-  const shown = names.slice(0, MAX_SHOW);
-  const extra = names.length - MAX_SHOW;
-  const tags = shown.map(n =>
-    `<span class="ausschuss-tag" title="${n}">${AUSSCHUSS_SHORT[n] || n}</span>`
-  ).join('');
-  const more = extra > 0
-    ? `<span class="ausschuss-tag ausschuss-more" title="${names.slice(MAX_SHOW).join(', ')}">+${extra}</span>`
-    : '';
-  return `<div class="ausschuss-tags">${tags}${more}</div>`;
+  const active = document.getElementById('filter-ausschuss')?.value || '';
+  const tags = names.map(n => {
+    const cls = (active && n === active) ? 'ausschuss-tag ausschuss-tag-active' : 'ausschuss-tag';
+    return `<span class="${cls}" title="${n}">${AUSSCHUSS_SHORT[n] || n}</span>`;
+  }).join('');
+  return `<div class="ausschuss-tags">${tags}</div>`;
 }
 
 function initBezirkMap(allFeatures, activeBaNum) {
