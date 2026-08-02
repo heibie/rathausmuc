@@ -1,0 +1,183 @@
+{
+  "_comment": "Registry aller Datenquellen für faq.html. 'used_in' verlinkt auf App-Ansichten, 'check' definiert wie scripts/check_sources.py bzw. cron/check_sources.php Live-Änderungen der Originalquelle prüft. Status-Ergebnisse landen in data/source-status.json (automatisch generiert, nicht manuell pflegen).",
+  "github_repo": "heibie/rathausmuc",
+  "categories": [
+    {
+      "title": "Stadtrat",
+      "sources": [
+        {
+          "id": "stadtrat",
+          "title": "Stadtrat München – 81 Mitglieder, Wahlperiode 2026–2032",
+          "files": ["data/stadtrat.csv"],
+          "used_in": [
+            { "label": "Stadtrat: Steckbrief", "href": "index.html#stadtrat/steckbrief" },
+            { "label": "Stadtrat: Mitgliederliste", "href": "index.html#stadtrat/liste" },
+            { "label": "Stadtrat: Netzwerkkarte", "href": "index.html#stadtrat/netzwerkkarte" }
+          ],
+          "original_source": { "label": "RIS München + wahlen-muenchen.de", "href": "https://risi.muenchen.de/risi/aktuelles?3" },
+          "turnus": "bei Nachrücken/Rücktritt (nicht zeitbasiert)",
+          "check": { "method": "heuristic" }
+        }
+      ]
+    },
+    {
+      "title": "Bezirksausschüsse",
+      "sources": [
+        {
+          "id": "bezirksausschuesse",
+          "title": "Bezirksausschüsse München – Mitgliederlisten BA 01–25",
+          "files": [
+            "data/ba01.csv", "data/ba02.csv", "data/ba03.csv", "data/ba04.csv", "data/ba05.csv",
+            "data/ba06.csv", "data/ba07.csv", "data/ba08.csv", "data/ba09.csv", "data/ba10.csv",
+            "data/ba11.csv", "data/ba12.csv", "data/ba13.csv", "data/ba14.csv", "data/ba15.csv",
+            "data/ba16.csv", "data/ba17.csv", "data/ba18.csv", "data/ba19.csv", "data/ba20.csv",
+            "data/ba21.csv", "data/ba22.csv", "data/ba23.csv", "data/ba24.csv", "data/ba25.csv"
+          ],
+          "used_in": [
+            { "label": "BA-Steckbrief (z.B. BA01)", "href": "index.html#ba01/steckbrief" },
+            { "label": "BA-Mitgliederliste (z.B. BA01)", "href": "index.html#ba01/liste" }
+          ],
+          "original_source": { "label": "RIS München + wahlen-muenchen.de", "href": "https://risi.muenchen.de/risi/aktuelles?3" },
+          "turnus": "bei Nachrücken/Rücktritt (nicht zeitbasiert)",
+          "check": { "method": "heuristic" }
+        }
+      ]
+    },
+    {
+      "title": "Geodaten",
+      "sources": [
+        {
+          "id": "bezirke-geo",
+          "title": "Stadtbezirksgrenzen München (Geodaten)",
+          "files": ["data/bezirke.geojson"],
+          "used_in": [
+            { "label": "Startseite (Übersichtskarte)", "href": "index.html" },
+            { "label": "Steckbrief (Bezirkskarte, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData LHM – Stadtbezirke", "href": "https://opendata.muenchen.de/dataset/vablock_stadtbezirke_opendata" },
+          "turnus": "laufend (OpenData-Portal, WFS)",
+          "check": { "method": "ckan", "dataset": "vablock_stadtbezirke_opendata" }
+        }
+      ]
+    },
+    {
+      "id": "bevoelkerung-stadtstruktur",
+      "title": "Bevölkerung & Stadtstruktur (Open Data LHM)",
+      "sources": [
+        {
+          "id": "bezirke-bevoelkerung",
+          "title": "Bevölkerung und Fläche je Stadtbezirk",
+          "files": ["data/bezirke_bevoelkerung.csv"],
+          "used_in": [
+            { "label": "Startseite (Gesamtstadt-Kennzahlen)", "href": "index.html" },
+            { "label": "Steckbrief (Bezirksgröße, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData LHM – Bevölkerung in den Stadtbezirken", "href": "https://opendata.muenchen.de/dataset/bevoelkerung-stadtbezirken" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "bevoelkerung-stadtbezirken" }
+        },
+        {
+          "id": "motorisierungsgrad",
+          "title": "Motorisierungsgrad je Stadtbezirk",
+          "files": ["data/motorisierungsgrad.csv"],
+          "used_in": [
+            { "label": "Startseite (Kennzahl)", "href": "index.html" },
+            { "label": "Steckbrief (Mobilität, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Verkehr", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-verkehr-motorisierungsgrad-personenkraftwagen-83r65mct" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-verkehr-motorisierungsgrad-personenkraftwagen-83r65mct" }
+        },
+        {
+          "id": "durchschnittsalter",
+          "title": "Durchschnittsalter je Stadtbezirk",
+          "files": ["data/durchschnittsalter.csv"],
+          "used_in": [
+            { "label": "Startseite (Kennzahl)", "href": "index.html" },
+            { "label": "Steckbrief (Bevölkerung, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Bevölkerung", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-durchschnittsalter-83r65mct" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-bevoelkerung-durchschnittsalter-83r65mct" }
+        },
+        {
+          "id": "einpersonenhaushalte",
+          "title": "Einpersonenhaushalte je Stadtbezirk",
+          "files": ["data/einpersonenhaushalte.csv"],
+          "used_in": [
+            { "label": "Startseite (Kennzahl)", "href": "index.html" },
+            { "label": "Steckbrief (Bevölkerung, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Bevölkerung", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-einpersonenhaushalte-83r65mct" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-bevoelkerung-einpersonenhaushalte-83r65mct" }
+        },
+        {
+          "id": "altersgruppen",
+          "title": "Altersgruppenverteilung je Stadtbezirk",
+          "files": ["data/altersgruppen.csv"],
+          "used_in": [
+            { "label": "Steckbrief (Bevölkerung, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Bevölkerung", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-altersgruppen-83r65mct" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-bevoelkerung-altersgruppen-83r65mct" }
+        },
+        {
+          "id": "bevoelkerungsanteil",
+          "title": "Bevölkerungsanteil der Stadtbezirke an der Gesamtstadt",
+          "files": ["data/bevoelkerungsanteil.csv"],
+          "used_in": [
+            { "label": "Steckbrief (nur BA, nicht Stadtrat)", "href": "index.html#ba01/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Bevölkerung", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-bevolkerungsanteil" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-bevoelkerung-bevolkerungsanteil" }
+        },
+        {
+          "id": "bevoelkerungsdichte",
+          "title": "Bevölkerungsdichte je Stadtbezirk",
+          "files": ["data/bevoelkerungsdichte.csv"],
+          "used_in": [
+            { "label": "Steckbrief (Fläche, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Bevölkerung", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-bevoelkerungsdichte-83r65mct" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-bevoelkerung-bevoelkerungsdichte-83r65mct" }
+        },
+        {
+          "id": "flaechennutzung",
+          "title": "Flächennutzung je Stadtbezirk",
+          "files": ["data/flaechennutzung.csv"],
+          "used_in": [
+            { "label": "Steckbrief (Fläche, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Flächen", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-flaechen-flaechennutzung" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-flaechen-flaechennutzung" }
+        },
+        {
+          "id": "erstzulassung-pkw",
+          "title": "PKW-Erstzulassungen je Stadtbezirk",
+          "files": ["data/erstzulassung_pkw.csv"],
+          "used_in": [
+            { "label": "Steckbrief (Mobilität, z.B. Stadtrat)", "href": "index.html#stadtrat/steckbrief" }
+          ],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Verkehr", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-verkehr-erstzulassungsanteil-personenkraftwagen-83r65mct" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-verkehr-erstzulassungsanteil-personenkraftwagen-83r65mct" }
+        },
+        {
+          "id": "ueberalterungsquotient",
+          "title": "Überalterungsquotient je Stadtbezirk",
+          "files": ["data/ueberalterungsquotient.csv"],
+          "used_in": [],
+          "original_source": { "label": "OpenData München – Indikatorenatlas Bevölkerung", "href": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-ueberalterungsquotient-83r65mct" },
+          "turnus": "jährlich",
+          "check": { "method": "ckan", "dataset": "indikatorenatlas-bevoelkerung-ueberalterungsquotient-83r65mct" },
+          "note": "Datensatz wird aktuell in keiner Ansicht der App verwendet (nicht in OPENDATA_INDICATORS in js/config.js) - nur zur Dokumentation vorhanden."
+        }
+      ]
+    }
+  ]
+}

@@ -22,3 +22,6 @@ restructure_hoerspiele.py
 # Lokale Entwicklung
 *.log
 *.code-workspace
+
+# Cron-Konfiguration mit Secrets (manuell auf den Server hochgeladen)
+cron/_cfg.php

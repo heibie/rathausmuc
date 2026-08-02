@@ -34,4 +34,5 @@ jobs:
             --exclude='~$*' \
             --exclude='*.log' \
             --exclude='dashboard' \
+            --exclude='cron/_cfg.php' \
             ./ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH"

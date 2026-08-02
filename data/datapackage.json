@@ -1,212 +1,5681 @@
 {
-  "name": "muenchen-kommunalpolitik-2026",
-  "title": "München Kommunalpolitik 2026 – Stadtrat und Bezirksausschüsse",
-  "description": "Gewählte Mitglieder des Münchner Stadtrats und der 25 Bezirksausschüsse nach der Kommunalwahl vom 8. März 2026. Datenquelle: Ratsinformationssystem München (risi.muenchen.de) und Wahlergebnisse (wahlen-muenchen.de).",
-  "licenses": [
-    {
-      "name": "cc-by-4.0",
-      "title": "Creative Commons Attribution 4.0",
-      "path": "https://creativecommons.org/licenses/by/4.0/"
-    }
-  ],
+  "name": "rathausmuc-muenchen",
+  "title": "RATHAUS MUC – Stadtrat & Bezirksausschüsse München 2026",
+  "description": "Datensätze zu Stadtrat, Bezirksausschüssen und Stadtbezirksstatistiken der Landeshauptstadt München, Wahlperiode 2026–2032. Zusammengestellt und veröffentlicht für rathausmuc.de.",
+  "version": "1.1.0",
+  "homepage": "https://rathausmuc.de",
   "contributors": [
     {
       "title": "Heiko Bielinski",
-      "email": "heiko@bielinski.de",
-      "role": "author"
+      "email": "kontakt@bielinski.de",
+      "role": "author",
+      "path": "https://rathausmuc.de"
     }
   ],
-  "sources": [
+  "licenses": [
     {
-      "title": "Ratsinformationssystem München",
-      "path": "https://risi.muenchen.de"
-    },
-    {
-      "title": "Wahlergebnisse München – Bezirksausschusswahl 2026",
-      "path": "https://www.wahlen-muenchen.de/ergebnisse/2_20260308bezirksausschusswahl/"
+      "name": "CC-BY-4.0",
+      "title": "Creative Commons Attribution 4.0 International",
+      "path": "https://creativecommons.org/licenses/by/4.0/"
     }
   ],
-  "version": "1.0.0",
-  "created": "2026-05-09",
+  "keywords": [
+    "stadtrat",
+    "münchen",
+    "bezirksausschuss",
+    "kommunalpolitik",
+    "opendata"
+  ],
+  "spatial": "München, Bayern, Deutschland",
+  "created": "2026-05-21",
   "resources": [
     {
       "name": "stadtrat",
       "path": "stadtrat.csv",
       "title": "Stadtrat München 2026",
-      "description": "81 gewählte Mitglieder des Münchner Stadtrats, Wahlperiode 2026–2032.",
+      "description": "81 gewählte Mitglieder des Münchner Stadtrats, Wahlperiode 2026–2032, inklusive Fraktions- und Parteiknoten für die Kumu-Netzwerkkarte (Type=Fraktion/Partei).",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
       "schema": {
         "fields": [
-          { "name": "Nachname",      "type": "string",  "constraints": { "required": true } },
-          { "name": "Vorname",       "type": "string",  "constraints": { "required": true } },
-          { "name": "Geschlecht",    "type": "string",  "constraints": { "enum": ["Herr", "Frau", ""] } },
-          { "name": "ID",            "type": "string" },
-          { "name": "Titel",         "type": "string",  "constraints": { "enum": ["Dr.", "Prof. Dr.", ""] } },
-          { "name": "Partei",        "type": "string" },
-          { "name": "Fraktion",      "type": "string" },
-          { "name": "Wahlperiode",   "type": "string" },
-          { "name": "E-Mail",        "type": "string",  "format": "email" },
-          { "name": "Website",       "type": "string",  "format": "uri" },
-          { "name": "Büro-Adresse",  "type": "string" },
-          { "name": "Instagram",     "type": "string",  "format": "uri" },
-          { "name": "Facebook",      "type": "string",  "format": "uri" },
-          { "name": "LinkedIn",      "type": "string",  "format": "uri" },
-          { "name": "TikTok",        "type": "string",  "format": "uri" },
-          { "name": "Mastodon",      "type": "string",  "format": "uri" },
-          { "name": "RIS-Link",      "type": "string",  "format": "uri" },
-          { "name": "Image",         "type": "string",  "format": "uri" },
-          { "name": "Wahldatum",     "type": "date",    "format": "%Y-%m-%d" },
-          { "name": "Mandatsbeginn", "type": "date",    "format": "%Y-%m-%d" },
-          { "name": "Listenplatz",   "type": "integer" },
-          { "name": "Stimmen",       "type": "integer" },
-          { "name": "Lebenslauf",    "type": "string" },
-          { "name": "Ausschuss 1",   "type": "string" },
-          { "name": "Ausschuss 2",   "type": "string" },
-          { "name": "Ausschuss 3",   "type": "string" },
-          { "name": "Ausschuss 4",   "type": "string" },
-          { "name": "Ausschuss 5",   "type": "string" },
-          { "name": "Ausschuss 6",   "type": "string" },
-          { "name": "Ausschuss 7",   "type": "string" },
-          { "name": "Ausschuss 8",   "type": "string" }
+          {
+            "name": "Label",
+            "type": "string",
+            "description": "Anzeigename (Kumu-Netzwerkkarte)"
+          },
+          {
+            "name": "Type",
+            "type": "string",
+            "description": "Kumu-Knotentyp: Person, Fraktion oder Partei",
+            "constraints": {
+              "enum": [
+                "Person",
+                "Fraktion",
+                "Partei"
+              ]
+            }
+          },
+          {
+            "name": "Tags",
+            "type": "string",
+            "description": "Kumu-Tags (aktuell ungenutzt)"
+          },
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID RIS",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Fraktion",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr.",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Bürgermeister",
+            "type": "string",
+            "description": "Rang als Bürgermeister*in: 1 = OB, 2 = 2. Bürgermeister*in, 3 = 3. Bürgermeister*in, sonst leer"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "description": "Lebenslauf/Kurzbeschreibung"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuesse",
+            "type": "string",
+            "description": "Alle Ausschüsse des Mitglieds als Pipe-separierte Liste (z.B. 'Bildungsausschuss | Kulturausschuss')"
+          },
+          {
+            "name": "Feed_Instagram",
+            "type": "string",
+            "format": "uri",
+            "description": "Proxy-URL (Supabase Edge Function) zum Einbetten des Instagram-Feeds ohne CORS-Probleme"
+          },
+          {
+            "name": "Feed_Facebook",
+            "type": "string",
+            "format": "uri",
+            "description": "Proxy-URL für Facebook-Feed-Einbettung"
+          },
+          {
+            "name": "Feed_TikTok",
+            "type": "string",
+            "format": "uri",
+            "description": "Proxy-URL für TikTok-Feed-Einbettung"
+          }
         ],
-        "primaryKey": ["ID"]
+        "primaryKey": [
+          "ID RIS"
+        ]
       }
     },
     {
-      "name": "ba01", "path": "ba01.csv", "title": "BA 01 · Altstadt-Lehel",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba02", "path": "ba02.csv", "title": "BA 02 · Ludwigsvorstadt-Isarvorstadt",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba03", "path": "ba03.csv", "title": "BA 03 · Maxvorstadt",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba04", "path": "ba04.csv", "title": "BA 04 · Schwabing-West",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba05", "path": "ba05.csv", "title": "BA 05 · Au-Haidhausen",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba06", "path": "ba06.csv", "title": "BA 06 · Sendling",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba07", "path": "ba07.csv", "title": "BA 07 · Sendling-Westpark",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba08", "path": "ba08.csv", "title": "BA 08 · Schwanthalerhöhe",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba09", "path": "ba09.csv", "title": "BA 09 · Neuhausen-Nymphenburg",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba10", "path": "ba10.csv", "title": "BA 10 · Moosach",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba11", "path": "ba11.csv", "title": "BA 11 · Milbertshofen-Am Hart",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba12", "path": "ba12.csv", "title": "BA 12 · Schwabing-Freimann",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba13", "path": "ba13.csv", "title": "BA 13 · Bogenhausen",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba14", "path": "ba14.csv", "title": "BA 14 · Berg am Laim",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba15", "path": "ba15.csv", "title": "BA 15 · Trudering-Riem",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba16", "path": "ba16.csv", "title": "BA 16 · Ramersdorf-Perlach",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba17", "path": "ba17.csv", "title": "BA 17 · Obergiesing-Fasangarten",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba18", "path": "ba18.csv", "title": "BA 18 · Untergiesing-Harlaching",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba19", "path": "ba19.csv", "title": "BA 19 · Thalkirchen-Obersendling-Forstenried-Fürstenried-Solln",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba20", "path": "ba20.csv", "title": "BA 20 · Hadern",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba21", "path": "ba21.csv", "title": "BA 21 · Pasing-Obermenzing",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba22", "path": "ba22.csv", "title": "BA 22 · Aubing-Lochhausen-Langwied",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba23", "path": "ba23.csv", "title": "BA 23 · Allach-Untermenzing",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba24", "path": "ba24.csv", "title": "BA 24 · Feldmoching-Hasenbergl",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    },
-    {
-      "name": "ba25", "path": "ba25.csv", "title": "BA 25 · Laim",
-      "schema": { "$ref": "#/definitions/ba-schema" }
-    }
-  ],
-  "definitions": {
-    "ba-schema": {
-      "fields": [
-        { "name": "Nachname",      "type": "string",  "constraints": { "required": true } },
-        { "name": "Vorname",       "type": "string",  "constraints": { "required": true } },
-        { "name": "Geschlecht",    "type": "string",  "constraints": { "enum": ["Herr", "Frau", ""] } },
-        { "name": "ID",            "type": "string" },
-        { "name": "Titel",         "type": "string" },
-        { "name": "Partei",        "type": "string" },
-        { "name": "Wahlperiode",   "type": "string" },
-        { "name": "E-Mail",        "type": "string",  "format": "email" },
-        { "name": "Website",       "type": "string",  "format": "uri" },
-        { "name": "Büro-Adresse",  "type": "string" },
-        { "name": "Instagram",     "type": "string",  "format": "uri" },
-        { "name": "Facebook",      "type": "string",  "format": "uri" },
-        { "name": "LinkedIn",      "type": "string",  "format": "uri" },
-        { "name": "TikTok",        "type": "string",  "format": "uri" },
-        { "name": "Mastodon",      "type": "string",  "format": "uri" },
-        { "name": "RIS-Link",      "type": "string",  "format": "uri" },
-        { "name": "Image",         "type": "string",  "format": "uri" },
-        { "name": "Wahldatum",     "type": "date",    "format": "%Y-%m-%d" },
-        { "name": "Mandatsbeginn", "type": "date",    "format": "%Y-%m-%d" },
-        { "name": "Listenplatz",   "type": "integer" },
-        { "name": "Stimmen",       "type": "integer" },
-        { "name": "Lebenslauf",    "type": "string" },
-        { "name": "Ausschuss 1",   "type": "string" },
-        { "name": "Ausschuss 2",   "type": "string" },
-        { "name": "Ausschuss 3",   "type": "string" },
-        { "name": "Ausschuss 4",   "type": "string" },
-        { "name": "Ausschuss 5",   "type": "string" },
-        { "name": "Ausschuss 6",   "type": "string" },
-        { "name": "Ausschuss 7",   "type": "string" },
-        { "name": "Ausschuss 8",   "type": "string" }
+      "name": "ba01",
+      "path": "ba01.csv",
+      "title": "Bezirksausschuss 01 – Altstadt-Lehel",
+      "description": "Mitgliederliste des Bezirksausschusses 01 (Altstadt-Lehel), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
       ],
-      "primaryKey": ["ID"]
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba02",
+      "path": "ba02.csv",
+      "title": "Bezirksausschuss 02 – Ludwigsvorstadt-Isarvorstadt",
+      "description": "Mitgliederliste des Bezirksausschusses 02 (Ludwigsvorstadt-Isarvorstadt), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba03",
+      "path": "ba03.csv",
+      "title": "Bezirksausschuss 03 – Maxvorstadt",
+      "description": "Mitgliederliste des Bezirksausschusses 03 (Maxvorstadt), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba04",
+      "path": "ba04.csv",
+      "title": "Bezirksausschuss 04 – Schwabing-West",
+      "description": "Mitgliederliste des Bezirksausschusses 04 (Schwabing-West), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba05",
+      "path": "ba05.csv",
+      "title": "Bezirksausschuss 05 – Au-Haidhausen",
+      "description": "Mitgliederliste des Bezirksausschusses 05 (Au-Haidhausen), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba06",
+      "path": "ba06.csv",
+      "title": "Bezirksausschuss 06 – Sendling",
+      "description": "Mitgliederliste des Bezirksausschusses 06 (Sendling), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba07",
+      "path": "ba07.csv",
+      "title": "Bezirksausschuss 07 – Sendling-Westpark",
+      "description": "Mitgliederliste des Bezirksausschusses 07 (Sendling-Westpark), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba08",
+      "path": "ba08.csv",
+      "title": "Bezirksausschuss 08 – Schwanthalerhöhe",
+      "description": "Mitgliederliste des Bezirksausschusses 08 (Schwanthalerhöhe), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba09",
+      "path": "ba09.csv",
+      "title": "Bezirksausschuss 09 – Neuhausen-Nymphenburg",
+      "description": "Mitgliederliste des Bezirksausschusses 09 (Neuhausen-Nymphenburg), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba10",
+      "path": "ba10.csv",
+      "title": "Bezirksausschuss 10 – Moosach",
+      "description": "Mitgliederliste des Bezirksausschusses 10 (Moosach), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba11",
+      "path": "ba11.csv",
+      "title": "Bezirksausschuss 11 – Milbertshofen-Am Hart",
+      "description": "Mitgliederliste des Bezirksausschusses 11 (Milbertshofen-Am Hart), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba12",
+      "path": "ba12.csv",
+      "title": "Bezirksausschuss 12 – Schwabing-Freimann",
+      "description": "Mitgliederliste des Bezirksausschusses 12 (Schwabing-Freimann), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba13",
+      "path": "ba13.csv",
+      "title": "Bezirksausschuss 13 – Bogenhausen",
+      "description": "Mitgliederliste des Bezirksausschusses 13 (Bogenhausen), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba14",
+      "path": "ba14.csv",
+      "title": "Bezirksausschuss 14 – Berg am Laim",
+      "description": "Mitgliederliste des Bezirksausschusses 14 (Berg am Laim), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba15",
+      "path": "ba15.csv",
+      "title": "Bezirksausschuss 15 – Trudering-Riem",
+      "description": "Mitgliederliste des Bezirksausschusses 15 (Trudering-Riem), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba16",
+      "path": "ba16.csv",
+      "title": "Bezirksausschuss 16 – Ramersdorf-Perlach",
+      "description": "Mitgliederliste des Bezirksausschusses 16 (Ramersdorf-Perlach), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba17",
+      "path": "ba17.csv",
+      "title": "Bezirksausschuss 17 – Obergiesing-Fasangarten",
+      "description": "Mitgliederliste des Bezirksausschusses 17 (Obergiesing-Fasangarten), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba18",
+      "path": "ba18.csv",
+      "title": "Bezirksausschuss 18 – Untergiesing-Harlaching",
+      "description": "Mitgliederliste des Bezirksausschusses 18 (Untergiesing-Harlaching), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba19",
+      "path": "ba19.csv",
+      "title": "Bezirksausschuss 19 – Thalkirchen-Obersendling-Forstenried-Fürstenried-Solln",
+      "description": "Mitgliederliste des Bezirksausschusses 19 (Thalkirchen-Obersendling-Forstenried-Fürstenried-Solln), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba20",
+      "path": "ba20.csv",
+      "title": "Bezirksausschuss 20 – Hadern",
+      "description": "Mitgliederliste des Bezirksausschusses 20 (Hadern), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba21",
+      "path": "ba21.csv",
+      "title": "Bezirksausschuss 21 – Pasing-Obermenzing",
+      "description": "Mitgliederliste des Bezirksausschusses 21 (Pasing-Obermenzing), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba22",
+      "path": "ba22.csv",
+      "title": "Bezirksausschuss 22 – Aubing-Lochhausen-Langwied",
+      "description": "Mitgliederliste des Bezirksausschusses 22 (Aubing-Lochhausen-Langwied), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba23",
+      "path": "ba23.csv",
+      "title": "Bezirksausschuss 23 – Allach-Untermenzing",
+      "description": "Mitgliederliste des Bezirksausschusses 23 (Allach-Untermenzing), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba24",
+      "path": "ba24.csv",
+      "title": "Bezirksausschuss 24 – Feldmoching-Hasenbergl",
+      "description": "Mitgliederliste des Bezirksausschusses 24 (Feldmoching-Hasenbergl), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ba25",
+      "path": "ba25.csv",
+      "title": "Bezirksausschuss 25 – Laim",
+      "description": "Mitgliederliste des Bezirksausschusses 25 (Laim), Wahlperiode 2026–2032.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "RIS München",
+          "path": "https://risi.muenchen.de/risi/aktuelles?3"
+        },
+        {
+          "title": "wahlen-muenchen.de",
+          "path": "https://www.wahlen-muenchen.de"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Nachname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Vorname",
+            "type": "string",
+            "constraints": {
+              "required": true
+            }
+          },
+          {
+            "name": "Geschlecht",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Herr",
+                "Frau",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "ID",
+            "type": "string",
+            "description": "Interne ID im Ratsinformationssystem (RIS)"
+          },
+          {
+            "name": "Titel",
+            "type": "string",
+            "constraints": {
+              "enum": [
+                "Dr.",
+                "Prof. Dr., ",
+                ""
+              ]
+            }
+          },
+          {
+            "name": "Partei",
+            "type": "string"
+          },
+          {
+            "name": "Wahlperiode",
+            "type": "string"
+          },
+          {
+            "name": "E-Mail",
+            "type": "string",
+            "format": "email"
+          },
+          {
+            "name": "Website",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Büro-Adresse",
+            "type": "string"
+          },
+          {
+            "name": "Instagram",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Facebook",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "LinkedIn",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "TikTok",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Mastodon",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "RIS-Link",
+            "type": "string",
+            "format": "uri"
+          },
+          {
+            "name": "Image",
+            "type": "string",
+            "format": "uri",
+            "description": "Portraitfoto-URL"
+          },
+          {
+            "name": "Wahldatum",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Mandatsbeginn",
+            "type": "date",
+            "format": "%Y-%m-%d"
+          },
+          {
+            "name": "Listenplatz",
+            "type": "integer"
+          },
+          {
+            "name": "Stimmen",
+            "type": "integer"
+          },
+          {
+            "name": "Lebenslauf",
+            "type": "string"
+          },
+          {
+            "name": "Ausschuss 1",
+            "type": "string",
+            "description": "Immer leer - BA-Mitglieder haben keine Ausschuss-Zuordnung wie im Stadtrat, Spalte ist ein ungenutzter Rest der gemeinsamen Vorlage mit stadtrat.csv"
+          },
+          {
+            "name": "Ausschuss 2",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 3",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 4",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 5",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 6",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 7",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          },
+          {
+            "name": "Ausschuss 8",
+            "type": "string",
+            "description": "Immer leer, siehe Ausschuss 1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bezirke-geo",
+      "path": "bezirke.geojson",
+      "title": "Stadtbezirksgrenzen München",
+      "description": "Polygone der 25 Münchner Stadtbezirke (WGS84 GeoJSON FeatureCollection). Grundlage für die interaktive Karte.",
+      "mediatype": "application/geo+json",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData LHM – Stadtbezirke",
+          "path": "https://opendata.muenchen.de/dataset/vablock_stadtbezirke_opendata"
+        }
+      ]
+    },
+    {
+      "name": "bezirke-bevoelkerung",
+      "path": "bezirke_bevoelkerung.csv",
+      "title": "Bevölkerung und Fläche je Stadtbezirk",
+      "description": "Einwohnerzahl, Fläche (ha) und Einwohnerdichte je Stadtbezirk sowie deren jeweiliger Anteil an der Gesamtstadt.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData LHM – Bevölkerung in den Stadtbezirken",
+          "path": "https://opendata.muenchen.de/dataset/bevoelkerung-stadtbezirken"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "stadtbezirksnummer",
+            "type": "integer"
+          },
+          {
+            "name": "stadtbezirk",
+            "type": "string"
+          },
+          {
+            "name": "bevölkerung",
+            "type": "integer"
+          },
+          {
+            "name": "bevölkerung in prozent",
+            "type": "number",
+            "description": "Anteil an der Gesamtstadt in Prozent"
+          },
+          {
+            "name": "fläche in ha",
+            "type": "number"
+          },
+          {
+            "name": "fläche in prozent",
+            "type": "number",
+            "description": "Anteil an der Gesamtstadtfläche in Prozent"
+          },
+          {
+            "name": "einwohnerdichte",
+            "type": "integer",
+            "description": "Einwohner je Hektar"
+          }
+        ]
+      }
+    },
+    {
+      "name": "motorisierungsgrad",
+      "path": "motorisierungsgrad.csv",
+      "title": "Motorisierungsgrad je Stadtbezirk",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: PKW je 1.000 Einwohner.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-verkehr-motorisierungsgrad-personenkraftwagen-83r65mct"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          }
+        ]
+      }
+    },
+    {
+      "name": "durchschnittsalter",
+      "path": "durchschnittsalter.csv",
+      "title": "Durchschnittsalter je Stadtbezirk",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: Jahre.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-durchschnittsalter-83r65mct"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.3",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 3 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.4",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 4 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.5",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 5 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          },
+          {
+            "name": "Name.Basiswert.3",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.3"
+          },
+          {
+            "name": "Name.Basiswert.4",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.4"
+          },
+          {
+            "name": "Name.Basiswert.5",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.5"
+          }
+        ]
+      }
+    },
+    {
+      "name": "einpersonenhaushalte",
+      "path": "einpersonenhaushalte.csv",
+      "title": "Einpersonenhaushalte je Stadtbezirk",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: Prozent aller Haushalte.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-einpersonenhaushalte-83r65mct"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.3",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 3 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.4",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 4 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.5",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 5 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          },
+          {
+            "name": "Name.Basiswert.3",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.3"
+          },
+          {
+            "name": "Name.Basiswert.4",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.4"
+          },
+          {
+            "name": "Name.Basiswert.5",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.5"
+          }
+        ]
+      }
+    },
+    {
+      "name": "altersgruppen",
+      "path": "altersgruppen.csv",
+      "title": "Altersgruppenverteilung je Stadtbezirk",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: Prozent der Bevölkerung.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-altersgruppen-83r65mct"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.3",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 3 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.4",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 4 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.5",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 5 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          },
+          {
+            "name": "Name.Basiswert.3",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.3"
+          },
+          {
+            "name": "Name.Basiswert.4",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.4"
+          },
+          {
+            "name": "Name.Basiswert.5",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.5"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bevoelkerungsanteil",
+      "path": "bevoelkerungsanteil.csv",
+      "title": "Bevölkerungsanteil der Stadtbezirke an der Gesamtstadt",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: Prozent.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-bevolkerungsanteil"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.3",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 3 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.4",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 4 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.5",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 5 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          },
+          {
+            "name": "Name.Basiswert.3",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.3"
+          },
+          {
+            "name": "Name.Basiswert.4",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.4"
+          },
+          {
+            "name": "Name.Basiswert.5",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.5"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bevoelkerungsdichte",
+      "path": "bevoelkerungsdichte.csv",
+      "title": "Bevölkerungsdichte je Stadtbezirk",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: Einwohner je Hektar.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-bevoelkerungsdichte-83r65mct"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.3",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 3 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.4",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 4 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.5",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 5 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          },
+          {
+            "name": "Name.Basiswert.3",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.3"
+          },
+          {
+            "name": "Name.Basiswert.4",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.4"
+          },
+          {
+            "name": "Name.Basiswert.5",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.5"
+          }
+        ]
+      }
+    },
+    {
+      "name": "flaechennutzung",
+      "path": "flaechennutzung.csv",
+      "title": "Flächennutzung je Stadtbezirk",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: Prozent der Bezirksfläche.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-flaechen-flaechennutzung"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.3",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 3 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.4",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 4 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.5",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 5 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          },
+          {
+            "name": "Name.Basiswert.3",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.3"
+          },
+          {
+            "name": "Name.Basiswert.4",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.4"
+          },
+          {
+            "name": "Name.Basiswert.5",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.5"
+          }
+        ]
+      }
+    },
+    {
+      "name": "erstzulassung-pkw",
+      "path": "erstzulassung_pkw.csv",
+      "title": "PKW-Erstzulassungen je Stadtbezirk",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: Prozent.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-verkehr-erstzulassungsanteil-personenkraftwagen-83r65mct"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ueberalterungsquotient",
+      "path": "ueberalterungsquotient.csv",
+      "title": "Überalterungsquotient je Stadtbezirk",
+      "description": "Rohexport aus dem Indikatorenatlas München, gesamtstädtisch und je Stadtbezirk. Einheit von Indikatorwert: Verhältniszahl.",
+      "mediatype": "text/csv",
+      "encoding": "UTF-8",
+      "sources": [
+        {
+          "title": "OpenData München – Indikatorenatlas",
+          "path": "https://opendata.muenchen.de/dataset/indikatorenatlas-bevoelkerung-ueberalterungsquotient-83r65mct"
+        }
+      ],
+      "schema": {
+        "fields": [
+          {
+            "name": "Indikator",
+            "type": "string",
+            "description": "Name des Indikators"
+          },
+          {
+            "name": "Ausprägung",
+            "type": "string",
+            "description": "Kategorie/Ausprägung des Indikators"
+          },
+          {
+            "name": "Jahr",
+            "type": "integer",
+            "description": "Berichtsjahr"
+          },
+          {
+            "name": "Raumbezug",
+            "type": "string",
+            "description": "Gesamtstadt oder einzelner Stadtbezirk"
+          },
+          {
+            "name": "Indikatorwert",
+            "type": "number",
+            "description": "Indikatorwert (siehe Einheit in der Ressourcen-Beschreibung)"
+          },
+          {
+            "name": "Basiswert.1",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 1 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.2",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 2 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.3",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 3 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.4",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 4 der Indikator-Berechnung"
+          },
+          {
+            "name": "Basiswert.5",
+            "type": "number",
+            "description": "Zähler/Nenner Nr. 5 der Indikator-Berechnung"
+          },
+          {
+            "name": "Name.Basiswert.1",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.1"
+          },
+          {
+            "name": "Name.Basiswert.2",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.2"
+          },
+          {
+            "name": "Name.Basiswert.3",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.3"
+          },
+          {
+            "name": "Name.Basiswert.4",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.4"
+          },
+          {
+            "name": "Name.Basiswert.5",
+            "type": "string",
+            "description": "Bezeichnung von Basiswert.5"
+          }
+        ]
+      }
     }
-  }
+  ]
 }

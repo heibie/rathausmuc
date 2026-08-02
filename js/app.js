@@ -201,7 +201,7 @@ async function renderHome() {
         <div class="steckbrief-card-content">
           <div class="chart-title">München</div>
           ${groupsHtml}
-          <div class="steckbrief-source">Quelle: Open Data München · Stand 2024</div>
+          <div class="steckbrief-source">Quelle: <a href="faq.html#bevoelkerung-stadtstruktur">Open Data München</a> · Stand 2024</div>
         </div>
         <div class="steckbrief-card-map">
           <div id="home-map"></div>
@@ -744,7 +744,7 @@ async function renderSteckbrief(data, gremium) {
             <div class="sp-persons">${stadtspitzePersons}</div>
           </div>
           ${buildGroupsHtml(groups)}
-          <div class="steckbrief-source">Quelle: Open Data München · Stand ${standJahr}</div>
+          <div class="steckbrief-source">Quelle: <a href="faq.html#bevoelkerung-stadtstruktur">Open Data München</a> · Stand ${standJahr}</div>
         </div>
         <div class="steckbrief-map-card"><div id="overview-map"></div></div>`;
 
@@ -773,7 +773,7 @@ async function renderSteckbrief(data, gremium) {
           <div class="chart-card steckbrief-info">
             <div class="chart-title">Stadtbezirk</div>
             ${buildGroupsHtml(groups)}
-            <div class="steckbrief-source">Quelle: Open Data München · Stand ${standJahr}</div>
+            <div class="steckbrief-source">Quelle: <a href="faq.html#bevoelkerung-stadtstruktur">Open Data München</a> · Stand ${standJahr}</div>
           </div>
           <div class="steckbrief-map-card"><div id="bezirk-map"></div></div>`;
       }
