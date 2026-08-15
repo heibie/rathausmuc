@@ -1,34 +1,34 @@
 {
-    "generated_at": "2026-08-09T00:00:02+02:00",
+    "generated_at": "2026-08-16T00:00:01+02:00",
     "sources": {
         "stadtrat": {
             "status": "manual",
             "local_updated": "2026-05-21",
             "detail": "Kein automatischer Änderungscheck möglich (keine Live-API, kein fester Turnus). Turnus: bei Nachrücken/Rücktritt (nicht zeitbasiert)",
             "method": "heuristic",
-            "checked_at": "2026-08-09T00:00:02+02:00"
+            "checked_at": "2026-08-16T00:00:01+02:00"
         },
         "bezirksausschuesse": {
             "status": "manual",
             "local_updated": "2026-05-09",
             "detail": "Kein automatischer Änderungscheck möglich (keine Live-API, kein fester Turnus). Turnus: bei Nachrücken/Rücktritt (nicht zeitbasiert)",
             "method": "heuristic",
-            "checked_at": "2026-08-09T00:00:02+02:00"
+            "checked_at": "2026-08-16T00:00:01+02:00"
         },
         "bezirke-geo": {
             "status": "ok",
             "source_modified": "2026-05-27T14:38:27",
             "detail": "Laut Portal zuletzt geändert am 2026-05-27T14:38:27 (GeoPortal Last Modified Date), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-09"
         },
         "bezirke-bevoelkerung": {
-            "status": "changed",
+            "status": "ok",
             "source_modified": "2026-08-03T12:27:37.770641",
-            "detail": "Quelle wurde seit letzter Prüfung aktualisiert (laut resource last_modified/created).",
+            "detail": "Laut Portal zuletzt geändert am 2026-08-03T12:27:37.770641 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-09"
         },
         "motorisierungsgrad": {
@@ -36,7 +36,7 @@
             "source_modified": "2026-05-22T14:06:12.502404",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T14:06:12.502404 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         },
         "durchschnittsalter": {
@@ -44,7 +44,7 @@
             "source_modified": "2026-05-22T14:51:25.879548",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T14:51:25.879548 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         },
         "einpersonenhaushalte": {
@@ -52,7 +52,7 @@
             "source_modified": "2026-05-22T14:53:59.522508",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T14:53:59.522508 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         },
         "altersgruppen": {
@@ -60,7 +60,7 @@
             "source_modified": "2026-05-22T14:34:51.880565",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T14:34:51.880565 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         },
         "bevoelkerungsanteil": {
@@ -68,7 +68,7 @@
             "source_modified": "2026-05-22T14:42:26.184399",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T14:42:26.184399 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         },
         "bevoelkerungsdichte": {
@@ -76,7 +76,7 @@
             "source_modified": "2026-05-22T14:42:48.680793",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T14:42:48.680793 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         },
         "flaechennutzung": {
@@ -84,7 +84,7 @@
             "source_modified": "2026-05-22T13:56:32.100759",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T13:56:32.100759 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         },
         "erstzulassung-pkw": {
@@ -92,7 +92,7 @@
             "source_modified": "2026-05-22T14:05:44.585201",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T14:05:44.585201 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         },
         "ueberalterungsquotient": {
@@ -100,7 +100,7 @@
             "source_modified": "2026-05-22T15:19:00.691902",
             "detail": "Laut Portal zuletzt geändert am 2026-05-22T15:19:00.691902 (resource last_modified/created), keine Änderung seit letzter Prüfung.",
             "method": "ckan",
-            "checked_at": "2026-08-09T00:00:02+02:00",
+            "checked_at": "2026-08-16T00:00:01+02:00",
             "local_updated": "2026-05-10"
         }
     }
