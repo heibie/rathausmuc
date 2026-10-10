@@ -60,6 +60,11 @@ function renderAusschussTags(row) {
   return `<div class="ausschuss-tags">${tags}</div>`;
 }
 
+// Basemap: OpenStreetMap statt CARTO (CARTO verlangt seit 2026 einen API-Key).
+// OSM-Nutzungsbedingungen verlangen die Quellenangabe -> attributionControl bleibt an.
+const OSM_TILES = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const OSM_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+
 function initBezirkMap(allFeatures, activeBaNum) {
   if (_leafletMap) { _leafletMap.remove(); _leafletMap = null; }
   if (!document.getElementById('bezirk-map')) return;
@@ -67,10 +72,10 @@ function initBezirkMap(allFeatures, activeBaNum) {
   _leafletMap = L.map('bezirk-map', {
     zoomControl: true, scrollWheelZoom: true,
     doubleClickZoom: true, touchZoom: true,
-    dragging: true, attributionControl: false,
+    dragging: true,
   }).setView([48.137, 11.576], 11);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(_leafletMap);
+  L.tileLayer(OSM_TILES, { maxZoom: 19, attribution: OSM_ATTRIBUTION }).addTo(_leafletMap);
 
   const geoLayer = L.geoJSON({ type: 'FeatureCollection', features: allFeatures }, {
     style(feature) {
@@ -114,10 +119,10 @@ function initHomeMap(features) {
   _homeMap = L.map('overview-map', {
     zoomControl: true, scrollWheelZoom: true,
     doubleClickZoom: true, touchZoom: true,
-    dragging: true, attributionControl: false,
+    dragging: true,
   }).setView([48.137, 11.576], 11);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(_homeMap);
+  L.tileLayer(OSM_TILES, { maxZoom: 19, attribution: OSM_ATTRIBUTION }).addTo(_homeMap);
 
   const geoLayer = L.geoJSON({ type: 'FeatureCollection', features }, {
     style: { color: '#111111', weight: 1.5, fillColor: '#FFCC00', fillOpacity: 0.25 },
