@@ -35,6 +35,8 @@ data/
 | [PapaParse](https://www.papaparse.com) | 5.4.1 | CSV-Parsing im Browser | [Releases](https://github.com/mholt/PapaParse/releases) |
 | [Kumu](https://kumu.io) | – | Netzwerkkarte (iFrame-Embed) | – |
 
+**Basemap:** OpenStreetMap-Kacheln (`tile.openstreetmap.org`, ohne API-Key) für beide Leaflet-Karten (Übersichtskarte Startseite, Bezirkskarte im BA-Steckbrief), Konstanten `OSM_TILES`/`OSM_ATTRIBUTION` in `js/app.js`. Quellenangabe „© OpenStreetMap" muss sichtbar bleiben (OSM-Nutzungsbedingungen). Grau-Filter für besseren Kontrast per CSS auf `.leaflet-tile-pane` in `index.html`. Bis 2026-10 lief hier CARTO `light_all` – CARTO verlangt dafür inzwischen einen API-Key, deshalb umgestellt.
+
 > **Library-Updates (einmal jährlich prüfen):** Versionsnummern sind fest in den CDN-URLs in `index.html` eingebaut. Release-Seiten prüfen, Versionen tauschen, kurz testen, committen.
 
 ---
